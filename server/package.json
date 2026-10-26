@@ -1,0 +1,17 @@
+{
+  "name": "mango-marketplace-server",
+  "version": "1.0.0",
+  "description": "Backend REST API for White-Label E-Commerce Platform",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "seed": "node src/db/seed.js"
+  },
+  "keywords": ["ecommerce", "api", "express", "sqlite"],
+  "author": "Sancho772",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  }
+}

@@ -226,29 +226,35 @@
       </div>
 
       <div class="glass-card p-6 rounded-2xl flex flex-col gap-3">
-        <h3 class="font-display font-bold text-white text-base flex items-center gap-2">
-          <span class="material-symbols-outlined text-amberAccent text-[20px]">text_fields</span>
-          Типографика и сетка
+        <h3 class="font-display font-bold text-white text-base flex items-center justify-between">
+          <span class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-emerald-400 text-[20px]">database</span>
+            Backend REST API
+          </span>
+          <span class="text-[10px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded-full flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            Online: 4000
+          </span>
         </h3>
-        <p class="text-xs text-slate-400">Шрифты из Google Fonts и сетка:</p>
-        <ul class="text-xs text-slate-300 space-y-2 mt-1">
-          <li class="flex items-center justify-between border-b border-white/5 pb-1.5">
-            <span class="text-slate-400">Заголовки:</span>
-            <span class="font-display font-bold text-white">Plus Jakarta Sans</span>
-          </li>
-          <li class="flex items-center justify-between border-b border-white/5 pb-1.5">
-            <span class="text-slate-400">Основной текст:</span>
-            <span class="font-medium text-white">Inter</span>
-          </li>
-          <li class="flex items-center justify-between border-b border-white/5 pb-1.5">
-            <span class="text-slate-400">Иконки:</span>
-            <span class="text-white">Material Symbols Outlined</span>
-          </li>
-          <li class="flex items-center justify-between">
-            <span class="text-slate-400">Стилизация:</span>
-            <span class="text-white">Tailwind CSS (CDN)</span>
-          </li>
-        </ul>
+        <p class="text-xs text-slate-400">Node.js + SQLite база данных (без моков):</p>
+        <div class="space-y-1.5 text-xs mt-1">
+          <a href="http://127.0.0.1:4000/api/products" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 flex items-center justify-between transition-colors">
+            <span class="font-mono text-emerald-400">GET /api/products</span>
+            <span class="text-[11px] text-slate-400">Каталог товаров →</span>
+          </a>
+          <a href="http://127.0.0.1:4000/api/categories" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 flex items-center justify-between transition-colors">
+            <span class="font-mono text-amber-400">GET /api/categories</span>
+            <span class="text-[11px] text-slate-400">Категории →</span>
+          </a>
+          <a href="http://127.0.0.1:4000/api/admin/metrics" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 flex items-center justify-between transition-colors">
+            <span class="font-mono text-blue-400">GET /api/admin/metrics</span>
+            <span class="text-[11px] text-slate-400">Дашборд метрик →</span>
+          </a>
+          <a href="http://127.0.0.1:4000/api/admin/orders" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 flex items-center justify-between transition-colors">
+            <span class="font-mono text-purple-400">GET /api/admin/orders</span>
+            <span class="text-[11px] text-slate-400">Заказы в базе →</span>
+          </a>
+        </div>
       </div>
 
       <div class="glass-card p-6 rounded-2xl flex flex-col gap-3">
