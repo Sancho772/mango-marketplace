@@ -27,6 +27,8 @@ Thumbs.db
 
 # Database files
 *.db
+*.db-*
 *.sqlite
+*.sqlite-*
 *.sqlite3
 !seed.sqlite
