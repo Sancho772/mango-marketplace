@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>White-Label E-Commerce Platform UI — Stitch Preview Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            emerald: {
+              DEFAULT: '#006948',
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              600: '#00855d',
+              700: '#006948',
+              800: '#005137',
+              900: '#002114',
+            },
+            amberAccent: '#fea619',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background: radial-gradient(circle at 15% 15%, #0e1e17 0%, #0a0f14 60%, #06090c 100%);
+      color: #e2e8f0;
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+    }
+    .glass-card {
+      background: rgba(18, 26, 35, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-card:hover {
+      border-color: rgba(0, 105, 72, 0.4);
+    }
+    .badge-pill {
+      background: rgba(0, 105, 72, 0.15);
+      border: 1px solid rgba(133, 248, 196, 0.3);
+      color: #68dba9;
+    }
+  </style>
+</head>
+<body class="flex flex-col">
+  <!-- Top Navigation Bar -->
+  <header class="border-b border-white/10 glass-card sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-emerald-800 to-emerald-600 flex items-center justify-center text-white shadow-lg shadow-emerald-950/40">
+          <span class="material-symbols-outlined text-[26px]">shopping_bag</span>
+        </div>
+        <div>
+          <div class="flex items-center gap-2.5">
+            <h1 class="font-display font-bold text-xl text-white tracking-tight">White-Label E-Commerce Platform UI</h1>
+            <span class="badge-pill text-xs px-2.5 py-0.5 rounded-full font-medium">Google Stitch</span>
+          </div>
+          <p class="text-xs text-slate-400">Дизайн-система: Luminescent Commerce • 8 сгенерированных экранов</p>
+        </div>
+      </div>
+      
+      <!-- Language Switcher & Actions -->
+      <div class="flex items-center gap-3">
+        <div class="bg-black/40 border border-white/10 p-1 rounded-xl flex items-center gap-1">
+          <button id="btnRu" onclick="setLang('ru')" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all bg-emerald-700 text-white shadow-sm">
+            🇷🇺 Русский
+          </button>
+          <button id="btnEn" onclick="setLang('en')" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-400 hover:text-white">
+            🇬🇧 English
+          </button>
+        </div>
+        <a href="https://stitch.withgoogle.com/" target="_blank" class="glass-card hover:bg-white/5 text-xs text-slate-300 font-medium px-4 py-2 rounded-xl flex items-center gap-2 transition-all">
+          <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+          Открыть в Stitch
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main class="max-w-7xl mx-auto w-full px-6 py-8 flex flex-col gap-8 flex-1">
+    <!-- Screen Selector Tabs -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="screenTabs">
+      <!-- Tab 1: Catalog -->
+      <button onclick="selectScreen(0)" id="tab-0" class="glass-card p-4 rounded-2xl text-left border-emerald-600 bg-emerald-950/20 transition-all flex flex-col justify-between group">
+        <div class="flex items-center justify-between mb-3">
+          <span class="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
+            <span class="material-symbols-outlined text-[20px]">storefront</span>
+          </span>
+          <span class="text-[11px] font-mono text-slate-400 uppercase tracking-wider px-2 py-0.5 rounded bg-white/5">Desktop</span>
+        </div>
+        <div>
+          <div class="font-display font-semibold text-white text-sm group-hover:text-emerald-400 transition-colors" id="tabTitle-0">Витрина каталога</div>
+          <div class="text-xs text-slate-400 mt-1 line-clamp-1" id="tabDesc-0">Фильтры, товары, промо-баннеры</div>
+        </div>
+      </button>
+
+      <!-- Tab 2: Checkout -->
+      <button onclick="selectScreen(1)" id="tab-1" class="glass-card p-4 rounded-2xl text-left hover:border-white/20 transition-all flex flex-col justify-between group">
+        <div class="flex items-center justify-between mb-3">
+          <span class="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center">
+            <span class="material-symbols-outlined text-[20px]">credit_card</span>
+          </span>
+          <span class="text-[11px] font-mono text-slate-400 uppercase tracking-wider px-2 py-0.5 rounded bg-white/5">Desktop</span>
+        </div>
+        <div>
+          <div class="font-display font-semibold text-white text-sm group-hover:text-emerald-400 transition-colors" id="tabTitle-1">Оформление заказа</div>
+          <div class="text-xs text-slate-400 mt-1 line-clamp-1" id="tabDesc-1">Адрес доставки, оплата, корзина</div>
+        </div>
+      </button>
+
+      <!-- Tab 3: Admin Dashboard -->
+      <button onclick="selectScreen(2)" id="tab-2" class="glass-card p-4 rounded-2xl text-left hover:border-white/20 transition-all flex flex-col justify-between group">
+        <div class="flex items-center justify-between mb-3">
+          <span class="w-9 h-9 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center">
+            <span class="material-symbols-outlined text-[20px]">dashboard</span>
+          </span>
+          <span class="text-[11px] font-mono text-slate-400 uppercase tracking-wider px-2 py-0.5 rounded bg-white/5">Desktop</span>
+        </div>
+        <div>
+          <div class="font-display font-semibold text-white text-sm group-hover:text-emerald-400 transition-colors" id="tabTitle-2">Панель продавца</div>
+          <div class="text-xs text-slate-400 mt-1 line-clamp-1" id="tabDesc-2">Метрики продаж, заказы, аналитика</div>
+        </div>
+      </button>
+
+      <!-- Tab 4: Mobile Storefront -->
+      <button onclick="selectScreen(3)" id="tab-3" class="glass-card p-4 rounded-2xl text-left hover:border-white/20 transition-all flex flex-col justify-between group">
+        <div class="flex items-center justify-between mb-3">
+          <span class="w-9 h-9 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center">
+            <span class="material-symbols-outlined text-[20px]">smartphone</span>
+          </span>
+          <span class="text-[11px] font-mono text-slate-400 uppercase tracking-wider px-2 py-0.5 rounded bg-white/5">Mobile 390px</span>
+        </div>
+        <div>
+          <div class="font-display font-semibold text-white text-sm group-hover:text-emerald-400 transition-colors" id="tabTitle-3">Мобильная витрина</div>
+          <div class="text-xs text-slate-400 mt-1 line-clamp-1" id="tabDesc-3">Адаптивный каталог под смартфоны</div>
+        </div>
+      </button>
+    </div>
+
+    <!-- Active Screen Preview Container -->
+    <div class="glass-card rounded-3xl p-5 flex flex-col gap-4 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-white/5 pb-4">
+        <div class="flex items-center gap-3">
+          <div class="flex items-center gap-1.5">
+            <div class="w-3 h-3 rounded-full bg-rose-500/80"></div>
+            <div class="w-3 h-3 rounded-full bg-amber-500/80"></div>
+            <div class="w-3 h-3 rounded-full bg-emerald-500/80"></div>
+          </div>
+          <div class="text-xs font-mono text-slate-400 bg-black/40 px-3 py-1 rounded-lg border border-white/5" id="activeScreenPath">
+            catalog_ru.html
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <button onclick="toggleViewport()" id="viewportBtn" class="text-xs text-slate-300 glass-card px-3 py-1.5 rounded-lg flex items-center gap-1.5 hover:bg-white/5 transition-all">
+            <span class="material-symbols-outlined text-[16px]">aspect_ratio</span>
+            <span id="viewportLabel">Размер: 100%</span>
+          </button>
+          <a id="openTabBtn" href="catalog_ru.html" target="_blank" class="text-xs font-semibold bg-emerald-700 hover:bg-emerald-600 text-white px-4 py-1.5 rounded-lg flex items-center gap-1.5 transition-all shadow-sm">
+            <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+            Открыть экран на весь экран
+          </a>
+        </div>
+      </div>
+
+      <!-- Device Viewport Frame -->
+      <div class="w-full flex justify-center bg-black/60 rounded-2xl p-4 overflow-x-auto min-h-[750px]">
+        <div id="frameWrapper" class="w-full transition-all duration-300 flex justify-center">
+          <iframe id="previewIframe" src="catalog_ru.html" class="w-full h-[780px] rounded-xl border border-white/10 bg-white shadow-2xl transition-all"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- Design System Specs & File Directory -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="glass-card p-6 rounded-2xl flex flex-col gap-3">
+        <h3 class="font-display font-bold text-white text-base flex items-center gap-2">
+          <span class="material-symbols-outlined text-emerald-400 text-[20px]">palette</span>
+          Цветовая палитра
+        </h3>
+        <p class="text-xs text-slate-400">Гармоничные акценты Luminescent Commerce:</p>
+        <div class="grid grid-cols-2 gap-2 mt-2">
+          <div class="flex items-center gap-2.5 p-2 rounded-xl bg-white/5 border border-white/5">
+            <span class="w-6 h-6 rounded-lg shadow-sm" style="background: #006948;"></span>
+            <div class="text-xs">
+              <div class="font-medium text-white">#006948</div>
+              <div class="text-[10px] text-slate-400">Emerald Primary</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2.5 p-2 rounded-xl bg-white/5 border border-white/5">
+            <span class="w-6 h-6 rounded-lg shadow-sm" style="background: #fea619;"></span>
+            <div class="text-xs">
+              <div class="font-medium text-white">#FEA619</div>
+              <div class="text-[10px] text-slate-400">Amber Gold</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2.5 p-2 rounded-xl bg-white/5 border border-white/5">
+            <span class="w-6 h-6 rounded-lg shadow-sm" style="background: #faf8ff;"></span>
+            <div class="text-xs">
+              <div class="font-medium text-white">#FAF8FF</div>
+              <div class="text-[10px] text-slate-400">Surface Clean</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2.5 p-2 rounded-xl bg-white/5 border border-white/5">
+            <span class="w-6 h-6 rounded-lg shadow-sm" style="background: #131b2e;"></span>
+            <div class="text-xs">
+              <div class="font-medium text-white">#131B2E</div>
+              <div class="text-[10px] text-slate-400">Slate Charcoal</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-card p-6 rounded-2xl flex flex-col gap-3">
+        <h3 class="font-display font-bold text-white text-base flex items-center justify-between">
+          <span class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-emerald-400 text-[20px]">database</span>
+            Backend REST API
+          </span>
+          <span class="text-[10px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded-full flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            Online: 4000
+          </span>
+        </h3>
+        <p class="text-xs text-slate-400">Node.js + SQLite база данных (без моков):</p>
+        <div class="space-y-1.5 text-xs mt-1">
+          <a href="http://127.0.0.1:4000/api/products" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 flex items-center justify-between transition-colors">
+            <span class="font-mono text-emerald-400">GET /api/products</span>
+            <span class="text-[11px] text-slate-400">Каталог товаров →</span>
+          </a>
+          <a href="http://127.0.0.1:4000/api/categories" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 flex items-center justify-between transition-colors">
+            <span class="font-mono text-amber-400">GET /api/categories</span>
+            <span class="text-[11px] text-slate-400">Категории →</span>
+          </a>
+          <a href="http://127.0.0.1:4000/api/admin/metrics" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 flex items-center justify-between transition-colors">
+            <span class="font-mono text-blue-400">GET /api/admin/metrics</span>
+            <span class="text-[11px] text-slate-400">Дашборд метрик →</span>
+          </a>
+          <a href="http://127.0.0.1:4000/api/admin/orders" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 flex items-center justify-between transition-colors">
+            <span class="font-mono text-purple-400">GET /api/admin/orders</span>
+            <span class="text-[11px] text-slate-400">Заказы в базе →</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="glass-card p-6 rounded-2xl flex flex-col gap-3">
+        <h3 class="font-display font-bold text-white text-base flex items-center gap-2">
+          <span class="material-symbols-outlined text-blue-400 text-[20px]">folder</span>
+          Локальные файлы
+        </h3>
+        <p class="text-xs text-slate-400">Сохранены в текущей папке проекта:</p>
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <a href="catalog_ru.html" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 flex items-center gap-1.5 transition-colors">
+            <span class="material-symbols-outlined text-[14px] text-emerald-400">draft</span>
+            catalog_ru.html
+          </a>
+          <a href="catalog_en.html" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 flex items-center gap-1.5 transition-colors">
+            <span class="material-symbols-outlined text-[14px] text-emerald-400">draft</span>
+            catalog_en.html
+          </a>
+          <a href="checkout_ru.html" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 flex items-center gap-1.5 transition-colors">
+            <span class="material-symbols-outlined text-[14px] text-amber-400">draft</span>
+            checkout_ru.html
+          </a>
+          <a href="checkout_en.html" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 flex items-center gap-1.5 transition-colors">
+            <span class="material-symbols-outlined text-[14px] text-amber-400">draft</span>
+            checkout_en.html
+          </a>
+          <a href="admin_ru.html" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 flex items-center gap-1.5 transition-colors">
+            <span class="material-symbols-outlined text-[14px] text-blue-400">draft</span>
+            admin_ru.html
+          </a>
+          <a href="admin_en.html" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 flex items-center gap-1.5 transition-colors">
+            <span class="material-symbols-outlined text-[14px] text-blue-400">draft</span>
+            admin_en.html
+          </a>
+          <a href="mobile_ru.html" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 flex items-center gap-1.5 transition-colors">
+            <span class="material-symbols-outlined text-[14px] text-purple-400">draft</span>
+            mobile_ru.html
+          </a>
+          <a href="mobile_en.html" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 flex items-center gap-1.5 transition-colors">
+            <span class="material-symbols-outlined text-[14px] text-purple-400">draft</span>
+            mobile_en.html
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="border-t border-white/10 py-6 text-center text-xs text-slate-500">
+    White-Label E-Commerce Platform UI • Сгенерировано через Google Stitch MCP • Antigravity IDE
+  </footer>
+
+  <script>
+    let currentLang = 'ru';
+    let currentScreenIndex = 0;
+    let isConstrained = false;
+
+    const screens = {
+      ru: [
+        { file: 'catalog_ru.html', title: 'Витрина каталога', desc: 'Фильтры, товары, промо-баннеры', isMobile: false },
+        { file: 'checkout_ru.html', title: 'Оформление заказа', desc: 'Адрес доставки, оплата, корзина', isMobile: false },
+        { file: 'admin_ru.html', title: 'Панель продавца', desc: 'Метрики продаж, заказы, аналитика', isMobile: false },
+        { file: 'mobile_ru.html', title: 'Мобильная витрина', desc: 'Адаптивный каталог под смартфоны', isMobile: true }
+      ],
+      en: [
+        { file: 'catalog_en.html', title: 'Customer Storefront', desc: 'Catalog filtering, products & promo', isMobile: false },
+        { file: 'checkout_en.html', title: 'Seamless Checkout', desc: 'Delivery address, card payment & bag', isMobile: false },
+        { file: 'admin_en.html', title: 'Merchant Dashboard', desc: 'Analytics, revenue & order tracking', isMobile: false },
+        { file: 'mobile_en.html', title: 'Mobile Storefront', desc: 'Responsive mobile commerce layout', isMobile: true }
+      ]
+    };
+
+    function setLang(lang) {
+      currentLang = lang;
+      const btnRu = document.getElementById('btnRu');
+      const btnEn = document.getElementById('btnEn');
+      if (lang === 'ru') {
+        btnRu.className = 'px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all bg-emerald-700 text-white shadow-sm';
+        btnEn.className = 'px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-400 hover:text-white';
+      } else {
+        btnEn.className = 'px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all bg-emerald-700 text-white shadow-sm';
+        btnRu.className = 'px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-400 hover:text-white';
+      }
+
+      // Update titles in tabs
+      screens[lang].forEach((s, idx) => {
+        document.getElementById(`tabTitle-${idx}`).textContent = s.title;
+        document.getElementById(`tabDesc-${idx}`).textContent = s.desc;
+      });
+
+      selectScreen(currentScreenIndex);
+    }
+
+    function selectScreen(index) {
+      currentScreenIndex = index;
+      const list = screens[currentLang];
+      const active = list[index];
+
+      // Update active tab style
+      for (let i = 0; i < 4; i++) {
+        const tab = document.getElementById(`tab-${i}`);
+        if (i === index) {
+          tab.classList.add('border-emerald-600', 'bg-emerald-950/20');
+        } else {
+          tab.classList.remove('border-emerald-600', 'bg-emerald-950/20');
+        }
+      }
+
+      // Update iframe & links
+      const iframe = document.getElementById('previewIframe');
+      const frameWrapper = document.getElementById('frameWrapper');
+      iframe.src = active.file;
+      document.getElementById('activeScreenPath').textContent = active.file;
+      document.getElementById('openTabBtn').href = active.file;
+
+      if (active.isMobile) {
+        frameWrapper.className = 'w-[420px] transition-all duration-300 flex justify-center';
+        iframe.className = 'w-[390px] h-[780px] rounded-3xl border-4 border-slate-700 bg-white shadow-2xl';
+      } else {
+        frameWrapper.className = 'w-full transition-all duration-300 flex justify-center';
+        iframe.className = 'w-full h-[780px] rounded-xl border border-white/10 bg-white shadow-2xl';
+      }
+    }
+
+    function toggleViewport() {
+      const frameWrapper = document.getElementById('frameWrapper');
+      const label = document.getElementById('viewportLabel');
+      isConstrained = !isConstrained;
+      if (isConstrained) {
+        frameWrapper.className = 'max-w-4xl transition-all duration-300 flex justify-center';
+        label.textContent = 'Размер: Планшет (1024px)';
+      } else {
+        frameWrapper.className = 'w-full transition-all duration-300 flex justify-center';
+        label.textContent = 'Размер: 100%';
+      }
+    }
+  </script>
+</body>
+</html>

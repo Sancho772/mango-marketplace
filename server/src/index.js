@@ -42,17 +42,19 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Internal server error', message: err.message });
 });
 
-app.listen(PORT, '127.0.0.1', () => {
-  console.log(`===============================================`);
-  console.log(`🚀 Mango Marketplace API Server is running!`);
-  console.log(`📡 Base URL: http://127.0.0.1:${PORT}`);
-  console.log(`📦 REST Endpoints:`);
-  console.log(`   - GET  http://127.0.0.1:${PORT}/api/products`);
-  console.log(`   - GET  http://127.0.0.1:${PORT}/api/categories`);
-  console.log(`   - POST http://127.0.0.1:${PORT}/api/orders`);
-  console.log(`   - GET  http://127.0.0.1:${PORT}/api/admin/metrics`);
-  console.log(`   - GET  http://127.0.0.1:${PORT}/api/admin/orders`);
-  console.log(`===============================================`);
-});
+if (require.main === module) {
+  app.listen(PORT, '127.0.0.1', () => {
+    console.log(`===============================================`);
+    console.log(`🚀 Mango Marketplace API Server is running!`);
+    console.log(`📡 Base URL: http://127.0.0.1:${PORT}`);
+    console.log(`📦 REST Endpoints:`);
+    console.log(`   - GET  http://127.0.0.1:${PORT}/api/products`);
+    console.log(`   - GET  http://127.0.0.1:${PORT}/api/categories`);
+    console.log(`   - POST http://127.0.0.1:${PORT}/api/orders`);
+    console.log(`   - GET  http://127.0.0.1:${PORT}/api/admin/metrics`);
+    console.log(`   - GET  http://127.0.0.1:${PORT}/api/admin/orders`);
+    console.log(`===============================================`);
+  });
+}
 
 module.exports = app;

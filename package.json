@@ -1,0 +1,19 @@
+{
+  "name": "mango-marketplace",
+  "version": "1.0.0",
+  "description": "White-Label E-Commerce Platform",
+  "main": "server.js",
+  "scripts": {
+    "dev": "npm run dev --prefix client",
+    "build": "cd client && npm install && npm run build",
+    "server": "node server.js",
+    "test": "node tests/verify-backend.mjs"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  },
+  "keywords": ["ecommerce", "react", "vite", "tailwind", "express", "sqlite"],
+  "author": "Sancho772",
+  "license": "MIT"
+}

@@ -1,394 +1,582 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>White-Label E-Commerce Platform UI — Stitch Preview Hub</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            display: ['Plus Jakarta Sans', 'sans-serif'],
-          },
-          colors: {
-            emerald: {
-              DEFAULT: '#006948',
-              50: '#f0fdf4',
-              100: '#dcfce7',
-              600: '#00855d',
-              700: '#006948',
-              800: '#005137',
-              900: '#002114',
-            },
-            amberAccent: '#fea619',
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    body {
-      background: radial-gradient(circle at 15% 15%, #0e1e17 0%, #0a0f14 60%, #06090c 100%);
-      color: #e2e8f0;
-      min-height: 100vh;
-      font-family: 'Inter', sans-serif;
-    }
-    .glass-card {
-      background: rgba(18, 26, 35, 0.7);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    .glass-card:hover {
-      border-color: rgba(0, 105, 72, 0.4);
-    }
-    .badge-pill {
-      background: rgba(0, 105, 72, 0.15);
-      border: 1px solid rgba(133, 248, 196, 0.3);
-      color: #68dba9;
-    }
-  </style>
-</head>
-<body class="flex flex-col">
-  <!-- Top Navigation Bar -->
-  <header class="border-b border-white/10 glass-card sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-      <div class="flex items-center gap-4">
-        <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-emerald-800 to-emerald-600 flex items-center justify-center text-white shadow-lg shadow-emerald-950/40">
-          <span class="material-symbols-outlined text-[26px]">shopping_bag</span>
-        </div>
-        <div>
-          <div class="flex items-center gap-2.5">
-            <h1 class="font-display font-bold text-xl text-white tracking-tight">White-Label E-Commerce Platform UI</h1>
-            <span class="badge-pill text-xs px-2.5 py-0.5 rounded-full font-medium">Google Stitch</span>
-          </div>
-          <p class="text-xs text-slate-400">Дизайн-система: Luminescent Commerce • 8 сгенерированных экранов</p>
-        </div>
-      </div>
-      
-      <!-- Language Switcher & Actions -->
-      <div class="flex items-center gap-3">
-        <div class="bg-black/40 border border-white/10 p-1 rounded-xl flex items-center gap-1">
-          <button id="btnRu" onclick="setLang('ru')" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all bg-emerald-700 text-white shadow-sm">
-            🇷🇺 Русский
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={"darkMode":"class","theme":{"extend":{"colors":{"on-surface-variant":"#3d4a42","surface-container-high":"#e2e7ff","surface-tint":"#006c4a","on-tertiary-container":"#fffbff","inverse-on-surface":"#eef0ff","primary":"#006948","primary-fixed":"#85f8c4","secondary-container":"#fea619","background":"#faf8ff","tertiary":"#9b3e3b","on-primary":"#ffffff","surface-container-low":"#f2f3ff","outline-variant":"#bccac0","on-tertiary":"#ffffff","secondary":"#855300","surface-container":"#eaedff","on-secondary-container":"#684000","on-surface":"#131b2e","on-background":"#131b2e","on-secondary-fixed":"#2a1700","on-tertiary-fixed-variant":"#7f2928","error-container":"#ffdad6","inverse-primary":"#68dba9","primary-container":"#00855d","on-primary-fixed-variant":"#005137","surface-bright":"#faf8ff","error":"#ba1a1a","on-tertiary-fixed":"#410004","secondary-fixed-dim":"#ffb95f","on-primary-container":"#f5fff7","surface-dim":"#d2d9f4","tertiary-fixed-dim":"#ffb3ae","surface-variant":"#dae2fd","surface-container-lowest":"#ffffff","tertiary-container":"#ba5551","surface":"#faf8ff","on-secondary":"#ffffff","on-error":"#ffffff","primary-fixed-dim":"#68dba9","outline":"#6d7a72","on-primary-fixed":"#002114","on-error-container":"#93000a","secondary-fixed":"#ffddb8","surface-container-highest":"#dae2fd","on-secondary-fixed-variant":"#653e00","tertiary-fixed":"#ffdad7","inverse-surface":"#283044"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-xl":"2.5rem","space-sm":"0.5rem","margin":"2rem","space-lg":"1.5rem","margin-sm":"1rem","gutter":"1.5rem","gutter-sm":"1rem","space-md":"1rem","space-xs":"0.25rem"},"fontFamily":{"display-hero-mobile":["Plus Jakarta Sans"],"body-md":["Inter"],"body-sm":["Inter"],"label-sm":["Inter"],"body-lg":["Inter"],"badge-xs":["Inter"],"headline-lg-mobile":["Plus Jakarta Sans"],"display-hero":["Plus Jakarta Sans"],"label-md":["Inter"],"headline-sm":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"]},"fontSize":{"display-hero-mobile":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"700"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"body-sm":["12px",{"lineHeight":"18px","fontWeight":"400"}],"label-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.01em","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"badge-xs":["11px",{"lineHeight":"14px","letterSpacing":"0.04em","fontWeight":"700"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"display-hero":["48px",{"lineHeight":"56px","letterSpacing":"-0.025em","fontWeight":"700"}],"label-md":["14px",{"lineHeight":"20px","letterSpacing":"-0.005em","fontWeight":"500"}],"headline-sm":["18px",{"lineHeight":"26px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"600"}]}}}};</script></head><body class="bg-surface-container-lowest font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/90 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-20 max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between gap-space-lg"><div class="flex items-center gap-space-xl"><a class="flex items-center gap-space-sm group" data-path="storefront-home" href="#"><span class="w-9 h-9 rounded-lg bg-primary flex items-center justify-center text-on-primary shadow-sm"><span class="material-symbols-outlined text-[20px]">eco</span></span><span class="font-headline-sm text-headline-sm tracking-tight text-on-surface group-hover:text-primary transition-colors">VERDANT</span></a><nav class="hidden xl:flex items-center gap-space-lg" data-active-classes="text-primary font-label-md font-semibold"><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="apparel" href="#">Одежда</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="living" href="#">Дом и интерьер</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="footwear" href="#">Обувь</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="accessories" href="#">Аксессуары</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" data-path="sale" href="#">Распродажа</a></nav></div><div class="flex-1 max-w-md hidden md:block"><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-space-md text-on-surface-variant pointer-events-none text-[20px]">search</span><input class="w-full h-10 pl-11 pr-space-md bg-surface-container-low rounded-lg font-body-sm text-body-sm text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Поиск эко-коллекций, товаров..." type="search"></div></div><div class="flex items-center gap-space-md"><a class="w-10 h-10 rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all relative" data-path="wishlist" href="#" title="Избранное"><span class="material-symbols-outlined text-[22px]">favorite</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-secondary-container"></span></a><a class="h-10 px-space-md rounded-lg bg-primary hover:bg-primary-container text-on-primary flex items-center gap-space-sm shadow-sm transition-all" data-path="cart" href="#"><span class="material-symbols-outlined text-[20px]">shopping_bag</span><span class="hidden sm:inline font-label-md text-label-md text-on-primary">Корзина</span><span class="px-1.5 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-badge-xs text-badge-xs">2</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center" title="Личный кабинет"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface-container-lowest"><div class="flex flex-col w-full">
+<!-- Subtle Category Header & Context Anchor -->
+<section class="w-full bg-surface-container-low px-6 lg:px-12 py-space-lg">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+<div class="space-y-space-xs">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm">
+<a class="hover:text-primary transition-colors" href="#">Каталог</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Осень/Зима 2025</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-on-surface font-label-md">Дом и минимализм</span>
+</nav>
+<div class="flex flex-wrap items-center gap-space-sm pt-space-xs">
+<span class="px-2.5 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-badge-xs text-badge-xs tracking-wider uppercase">
+            НОВАЯ КОЛЛЕКЦИЯ • ВЫП. 08
+          </span>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">
+            Осенняя база и лаконичный интерьер
+          </h1>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+          Гардеробная классика и модульные предметы интерьера. Проверенное происхождение материалов, ноль синтетических волокон и безупречная точность кроя.
+        </p>
+</div>
+<!-- Quick Metadata Stats Pill -->
+<div class="flex items-center gap-space-md self-start md:self-auto bg-surface-container-lowest px-4 py-2.5 rounded-xl shadow-sm">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-md text-label-md text-on-surface">148 отобранных товаров</span>
+</div>
+<div class="h-4 w-px bg-surface-container"></div>
+<div class="flex items-center gap-1.5 text-secondary-container">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">4.92 ср. оценка магазина</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Catalog Space (Filter Sidebar + Product Grid) -->
+<section class="max-w-7xl mx-auto w-full px-6 lg:px-12 py-space-xl">
+<div class="flex flex-col lg:flex-row gap-space-xl items-start">
+<!-- LEFT SIDEBAR: Advanced Filtration Engine -->
+<aside class="w-full lg:w-72 shrink-0 space-y-space-lg">
+<!-- Filter Bar Header -->
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs text-on-surface font-headline-sm text-headline-sm">
+<span class="material-symbols-outlined text-[20px] text-primary">tune</span>
+<span>Фильтры</span>
+</div>
+<button class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors underline underline-offset-4" id="resetFiltersBtn">
+            Сбросить все
           </button>
-          <button id="btnEn" onclick="setLang('en')" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-400 hover:text-white">
-            🇬🇧 English
-          </button>
-        </div>
-        <a href="https://stitch.withgoogle.com/" target="_blank" class="glass-card hover:bg-white/5 text-xs text-slate-300 font-medium px-4 py-2 rounded-xl flex items-center gap-2 transition-all">
-          <span class="material-symbols-outlined text-[16px]">open_in_new</span>
-          Открыть в Stitch
-        </a>
-      </div>
-    </div>
-  </header>
-
-  <!-- Main Content Layout -->
-  <main class="max-w-7xl mx-auto w-full px-6 py-8 flex flex-col gap-8 flex-1">
-    <!-- Screen Selector Tabs -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="screenTabs">
-      <!-- Tab 1: Catalog -->
-      <button onclick="selectScreen(0)" id="tab-0" class="glass-card p-4 rounded-2xl text-left border-emerald-600 bg-emerald-950/20 transition-all flex flex-col justify-between group">
-        <div class="flex items-center justify-between mb-3">
-          <span class="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
-            <span class="material-symbols-outlined text-[20px]">storefront</span>
+</div>
+<!-- 1. Category Tree Navigation -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-space-sm">
+<span class="font-label-md text-label-md text-on-surface font-semibold tracking-wide uppercase text-[11px] block">
+            Категории
           </span>
-          <span class="text-[11px] font-mono text-slate-400 uppercase tracking-wider px-2 py-0.5 rounded bg-white/5">Desktop</span>
-        </div>
-        <div>
-          <div class="font-display font-semibold text-white text-sm group-hover:text-emerald-400 transition-colors" id="tabTitle-0">Витрина каталога</div>
-          <div class="text-xs text-slate-400 mt-1 line-clamp-1" id="tabDesc-0">Фильтры, товары, промо-баннеры</div>
-        </div>
-      </button>
-
-      <!-- Tab 2: Checkout -->
-      <button onclick="selectScreen(1)" id="tab-1" class="glass-card p-4 rounded-2xl text-left hover:border-white/20 transition-all flex flex-col justify-between group">
-        <div class="flex items-center justify-between mb-3">
-          <span class="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center">
-            <span class="material-symbols-outlined text-[20px]">credit_card</span>
+<div class="space-y-1">
+<button class="w-full flex items-center justify-between px-3 py-2 rounded-lg bg-primary-fixed text-on-primary-fixed font-label-md text-label-md text-left transition-all">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+                Все новинки осени
+              </span>
+<span class="font-badge-xs text-badge-xs bg-primary text-on-primary px-1.5 py-0.5 rounded-full">148</span>
+</button>
+<button class="w-full flex items-center justify-between px-3 py-2 rounded-lg hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md text-left transition-all">
+<span>Одежда и трикотаж</span>
+<span class="font-body-sm text-body-sm text-outline">64</span>
+</button>
+<button class="w-full flex items-center justify-between px-3 py-2 rounded-lg hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md text-left transition-all">
+<span>Посуда и декор</span>
+<span class="font-body-sm text-body-sm text-outline">32</span>
+</button>
+<button class="w-full flex items-center justify-between px-3 py-2 rounded-lg hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md text-left transition-all">
+<span>Изделия из кожи</span>
+<span class="font-body-sm text-body-sm text-outline">28</span>
+</button>
+<button class="w-full flex items-center justify-between px-3 py-2 rounded-lg hover:bg-surface-container text-on-surface-variant hover:text-on-surface font-label-md text-label-md text-left transition-all">
+<span>Ароматы для дома</span>
+<span class="font-body-sm text-body-sm text-outline">24</span>
+</button>
+</div>
+</div>
+<!-- 2. Price Range Slider & Inputs -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-space-md">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-semibold tracking-wide uppercase text-[11px]">
+              Диапазон цен
+            </span>
+<span class="font-label-sm text-label-sm text-primary font-semibold" id="priceDisplay">$20 – $450</span>
+</div>
+<div class="space-y-space-sm">
+<input class="w-full accent-primary h-1.5 bg-surface-container rounded-lg cursor-pointer" id="priceSlider" max="450" min="20" type="range" value="450">
+<div class="grid grid-cols-2 gap-space-sm pt-space-xs">
+<div class="bg-surface-container-low rounded-lg p-2 flex items-center">
+<span class="text-on-surface-variant font-label-sm text-label-sm mr-1">$</span>
+<input class="bg-transparent w-full text-on-surface font-label-md text-label-md focus:outline-none" type="number" value="20">
+</div>
+<div class="bg-surface-container-low rounded-lg p-2 flex items-center">
+<span class="text-on-surface-variant font-label-sm text-label-sm mr-1">$</span>
+<input class="bg-transparent w-full text-on-surface font-label-md text-label-md focus:outline-none" id="maxPriceInput" type="number" value="450">
+</div>
+</div>
+</div>
+</div>
+<!-- 3. Size Filter Chips -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-space-sm">
+<span class="font-label-md text-label-md text-on-surface font-semibold tracking-wide uppercase text-[11px] block">
+            Размер одежды
           </span>
-          <span class="text-[11px] font-mono text-slate-400 uppercase tracking-wider px-2 py-0.5 rounded bg-white/5">Desktop</span>
-        </div>
-        <div>
-          <div class="font-display font-semibold text-white text-sm group-hover:text-emerald-400 transition-colors" id="tabTitle-1">Оформление заказа</div>
-          <div class="text-xs text-slate-400 mt-1 line-clamp-1" id="tabDesc-1">Адрес доставки, оплата, корзина</div>
-        </div>
-      </button>
-
-      <!-- Tab 3: Admin Dashboard -->
-      <button onclick="selectScreen(2)" id="tab-2" class="glass-card p-4 rounded-2xl text-left hover:border-white/20 transition-all flex flex-col justify-between group">
-        <div class="flex items-center justify-between mb-3">
-          <span class="w-9 h-9 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center">
-            <span class="material-symbols-outlined text-[20px]">dashboard</span>
+<div class="flex flex-wrap gap-2" id="sizeChipGroup">
+<button class="size-chip px-3.5 py-1.5 rounded-lg bg-surface-container-low text-on-surface-variant font-label-md text-label-md hover:bg-surface-container transition-all">XS</button>
+<button class="size-chip px-3.5 py-1.5 rounded-lg bg-surface-container-low text-on-surface-variant font-label-md text-label-md hover:bg-surface-container transition-all">S</button>
+<button class="size-chip px-3.5 py-1.5 rounded-lg bg-primary text-on-primary font-label-md text-label-md shadow-sm">M</button>
+<button class="size-chip px-3.5 py-1.5 rounded-lg bg-primary text-on-primary font-label-md text-label-md shadow-sm">L</button>
+<button class="size-chip px-3.5 py-1.5 rounded-lg bg-surface-container-low text-on-surface-variant font-label-md text-label-md hover:bg-surface-container transition-all">XL</button>
+<button class="size-chip px-3.5 py-1.5 rounded-lg bg-surface-container-low text-on-surface-variant font-label-md text-label-md hover:bg-surface-container transition-all">XXL</button>
+</div>
+</div>
+<!-- 4. Color Swatches -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-space-sm">
+<span class="font-label-md text-label-md text-on-surface font-semibold tracking-wide uppercase text-[11px] block">
+            Цветовая палитра
           </span>
-          <span class="text-[11px] font-mono text-slate-400 uppercase tracking-wider px-2 py-0.5 rounded bg-white/5">Desktop</span>
-        </div>
-        <div>
-          <div class="font-display font-semibold text-white text-sm group-hover:text-emerald-400 transition-colors" id="tabTitle-2">Панель продавца</div>
-          <div class="text-xs text-slate-400 mt-1 line-clamp-1" id="tabDesc-2">Метрики продаж, заказы, аналитика</div>
-        </div>
-      </button>
-
-      <!-- Tab 4: Mobile Storefront -->
-      <button onclick="selectScreen(3)" id="tab-3" class="glass-card p-4 rounded-2xl text-left hover:border-white/20 transition-all flex flex-col justify-between group">
-        <div class="flex items-center justify-between mb-3">
-          <span class="w-9 h-9 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center">
-            <span class="material-symbols-outlined text-[20px]">smartphone</span>
+<div class="grid grid-cols-3 gap-2">
+<!-- Forest Green -->
+<button class="flex items-center gap-2 p-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-left transition-colors">
+<span class="w-4 h-4 rounded-full bg-primary ring-2 ring-primary ring-offset-1"></span>
+<span class="font-label-sm text-label-sm text-on-surface truncate">Лес</span>
+</button>
+<!-- Sandstone -->
+<button class="flex items-center gap-2 p-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-left transition-colors">
+<span class="w-4 h-4 rounded-full bg-surface-dim"></span>
+<span class="font-label-sm text-label-sm text-on-surface truncate">Песок</span>
+</button>
+<!-- Charcoal -->
+<button class="flex items-center gap-2 p-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-left transition-colors">
+<span class="w-4 h-4 rounded-full bg-inverse-surface"></span>
+<span class="font-label-sm text-label-sm text-on-surface truncate">Графит</span>
+</button>
+<!-- Amber Gold -->
+<button class="flex items-center gap-2 p-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-left transition-colors">
+<span class="w-4 h-4 rounded-full bg-secondary-container"></span>
+<span class="font-label-sm text-label-sm text-on-surface truncate">Янтарь</span>
+</button>
+<!-- Terracotta -->
+<button class="flex items-center gap-2 p-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-left transition-colors">
+<span class="w-4 h-4 rounded-full bg-tertiary"></span>
+<span class="font-label-sm text-label-sm text-on-surface truncate">Терракота</span>
+</button>
+<!-- Ivory -->
+<button class="flex items-center gap-2 p-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-left transition-colors">
+<span class="w-4 h-4 rounded-full bg-surface-bright shadow-inner"></span>
+<span class="font-label-sm text-label-sm text-on-surface truncate leading-tight">Слоновая кость</span>
+</button>
+</div>
+</div>
+<!-- 5. Brand Checkboxes -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-space-sm">
+<span class="font-label-md text-label-md text-on-surface font-semibold tracking-wide uppercase text-[11px] block">
+            Мастерские и бренды
           </span>
-          <span class="text-[11px] font-mono text-slate-400 uppercase tracking-wider px-2 py-0.5 rounded bg-white/5">Mobile 390px</span>
-        </div>
-        <div>
-          <div class="font-display font-semibold text-white text-sm group-hover:text-emerald-400 transition-colors" id="tabTitle-3">Мобильная витрина</div>
-          <div class="text-xs text-slate-400 mt-1 line-clamp-1" id="tabDesc-3">Адаптивный каталог под смартфоны</div>
-        </div>
-      </button>
-    </div>
-
-    <!-- Active Screen Preview Container -->
-    <div class="glass-card rounded-3xl p-5 flex flex-col gap-4 shadow-2xl">
-      <div class="flex items-center justify-between border-b border-white/5 pb-4">
-        <div class="flex items-center gap-3">
-          <div class="flex items-center gap-1.5">
-            <div class="w-3 h-3 rounded-full bg-rose-500/80"></div>
-            <div class="w-3 h-3 rounded-full bg-amber-500/80"></div>
-            <div class="w-3 h-3 rounded-full bg-emerald-500/80"></div>
-          </div>
-          <div class="text-xs font-mono text-slate-400 bg-black/40 px-3 py-1 rounded-lg border border-white/5" id="activeScreenPath">
-            catalog_ru.html
-          </div>
-        </div>
-
-        <div class="flex items-center gap-3">
-          <button onclick="toggleViewport()" id="viewportBtn" class="text-xs text-slate-300 glass-card px-3 py-1.5 rounded-lg flex items-center gap-1.5 hover:bg-white/5 transition-all">
-            <span class="material-symbols-outlined text-[16px]">aspect_ratio</span>
-            <span id="viewportLabel">Размер: 100%</span>
-          </button>
-          <a id="openTabBtn" href="catalog_ru.html" target="_blank" class="text-xs font-semibold bg-emerald-700 hover:bg-emerald-600 text-white px-4 py-1.5 rounded-lg flex items-center gap-1.5 transition-all shadow-sm">
-            <span class="material-symbols-outlined text-[16px]">open_in_new</span>
-            Открыть экран на весь экран
-          </a>
-        </div>
-      </div>
-
-      <!-- Device Viewport Frame -->
-      <div class="w-full flex justify-center bg-black/60 rounded-2xl p-4 overflow-x-auto min-h-[750px]">
-        <div id="frameWrapper" class="w-full transition-all duration-300 flex justify-center">
-          <iframe id="previewIframe" src="catalog_ru.html" class="w-full h-[780px] rounded-xl border border-white/10 bg-white shadow-2xl transition-all"></iframe>
-        </div>
-      </div>
-    </div>
-
-    <!-- Design System Specs & File Directory -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="glass-card p-6 rounded-2xl flex flex-col gap-3">
-        <h3 class="font-display font-bold text-white text-base flex items-center gap-2">
-          <span class="material-symbols-outlined text-emerald-400 text-[20px]">palette</span>
-          Цветовая палитра
-        </h3>
-        <p class="text-xs text-slate-400">Гармоничные акценты Luminescent Commerce:</p>
-        <div class="grid grid-cols-2 gap-2 mt-2">
-          <div class="flex items-center gap-2.5 p-2 rounded-xl bg-white/5 border border-white/5">
-            <span class="w-6 h-6 rounded-lg shadow-sm" style="background: #006948;"></span>
-            <div class="text-xs">
-              <div class="font-medium text-white">#006948</div>
-              <div class="text-[10px] text-slate-400">Emerald Primary</div>
-            </div>
-          </div>
-          <div class="flex items-center gap-2.5 p-2 rounded-xl bg-white/5 border border-white/5">
-            <span class="w-6 h-6 rounded-lg shadow-sm" style="background: #fea619;"></span>
-            <div class="text-xs">
-              <div class="font-medium text-white">#FEA619</div>
-              <div class="text-[10px] text-slate-400">Amber Gold</div>
-            </div>
-          </div>
-          <div class="flex items-center gap-2.5 p-2 rounded-xl bg-white/5 border border-white/5">
-            <span class="w-6 h-6 rounded-lg shadow-sm" style="background: #faf8ff;"></span>
-            <div class="text-xs">
-              <div class="font-medium text-white">#FAF8FF</div>
-              <div class="text-[10px] text-slate-400">Surface Clean</div>
-            </div>
-          </div>
-          <div class="flex items-center gap-2.5 p-2 rounded-xl bg-white/5 border border-white/5">
-            <span class="w-6 h-6 rounded-lg shadow-sm" style="background: #131b2e;"></span>
-            <div class="text-xs">
-              <div class="font-medium text-white">#131B2E</div>
-              <div class="text-[10px] text-slate-400">Slate Charcoal</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="glass-card p-6 rounded-2xl flex flex-col gap-3">
-        <h3 class="font-display font-bold text-white text-base flex items-center justify-between">
-          <span class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-emerald-400 text-[20px]">database</span>
-            Backend REST API
+<div class="space-y-2.5 font-label-md text-label-md text-on-surface">
+<label class="flex items-center gap-space-sm cursor-pointer select-none">
+<input checked="" class="w-4 h-4 rounded accent-primary cursor-pointer" type="checkbox">
+<span>Verdant Craft</span>
+<span class="ml-auto font-body-sm text-body-sm text-outline">58</span>
+</label>
+<label class="flex items-center gap-space-sm cursor-pointer select-none">
+<input checked="" class="w-4 h-4 rounded accent-primary cursor-pointer" type="checkbox">
+<span>Norse Studio</span>
+<span class="ml-auto font-body-sm text-body-sm text-outline">41</span>
+</label>
+<label class="flex items-center gap-space-sm cursor-pointer select-none">
+<input class="w-4 h-4 rounded accent-primary cursor-pointer" type="checkbox">
+<span>Atelier Minimal</span>
+<span class="ml-auto font-body-sm text-body-sm text-outline">32</span>
+</label>
+<label class="flex items-center gap-space-sm cursor-pointer select-none">
+<input class="w-4 h-4 rounded accent-primary cursor-pointer" type="checkbox">
+<span>Form &amp; Function</span>
+<span class="ml-auto font-body-sm text-body-sm text-outline">17</span>
+</label>
+</div>
+</div>
+<!-- 6. Customer Rating Filter -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-space-sm">
+<span class="font-label-md text-label-md text-on-surface font-semibold tracking-wide uppercase text-[11px] block">
+            Стандарты качества
           </span>
-          <span class="text-[10px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded-full flex items-center gap-1">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-            Online: 4000
-          </span>
-        </h3>
-        <p class="text-xs text-slate-400">Node.js + SQLite база данных (без моков):</p>
-        <div class="space-y-1.5 text-xs mt-1">
-          <a href="http://127.0.0.1:4000/api/products" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 flex items-center justify-between transition-colors">
-            <span class="font-mono text-emerald-400">GET /api/products</span>
-            <span class="text-[11px] text-slate-400">Каталог товаров →</span>
-          </a>
-          <a href="http://127.0.0.1:4000/api/categories" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 flex items-center justify-between transition-colors">
-            <span class="font-mono text-amber-400">GET /api/categories</span>
-            <span class="text-[11px] text-slate-400">Категории →</span>
-          </a>
-          <a href="http://127.0.0.1:4000/api/admin/metrics" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 flex items-center justify-between transition-colors">
-            <span class="font-mono text-blue-400">GET /api/admin/metrics</span>
-            <span class="text-[11px] text-slate-400">Дашборд метрик →</span>
-          </a>
-          <a href="http://127.0.0.1:4000/api/admin/orders" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 flex items-center justify-between transition-colors">
-            <span class="font-mono text-purple-400">GET /api/admin/orders</span>
-            <span class="text-[11px] text-slate-400">Заказы в базе →</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="glass-card p-6 rounded-2xl flex flex-col gap-3">
-        <h3 class="font-display font-bold text-white text-base flex items-center gap-2">
-          <span class="material-symbols-outlined text-blue-400 text-[20px]">folder</span>
-          Локальные файлы
-        </h3>
-        <p class="text-xs text-slate-400">Сохранены в текущей папке проекта:</p>
-        <div class="grid grid-cols-2 gap-2 text-xs">
-          <a href="catalog_ru.html" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 flex items-center gap-1.5 transition-colors">
-            <span class="material-symbols-outlined text-[14px] text-emerald-400">draft</span>
-            catalog_ru.html
-          </a>
-          <a href="catalog_en.html" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 flex items-center gap-1.5 transition-colors">
-            <span class="material-symbols-outlined text-[14px] text-emerald-400">draft</span>
-            catalog_en.html
-          </a>
-          <a href="checkout_ru.html" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 flex items-center gap-1.5 transition-colors">
-            <span class="material-symbols-outlined text-[14px] text-amber-400">draft</span>
-            checkout_ru.html
-          </a>
-          <a href="checkout_en.html" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 flex items-center gap-1.5 transition-colors">
-            <span class="material-symbols-outlined text-[14px] text-amber-400">draft</span>
-            checkout_en.html
-          </a>
-          <a href="admin_ru.html" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 flex items-center gap-1.5 transition-colors">
-            <span class="material-symbols-outlined text-[14px] text-blue-400">draft</span>
-            admin_ru.html
-          </a>
-          <a href="admin_en.html" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 flex items-center gap-1.5 transition-colors">
-            <span class="material-symbols-outlined text-[14px] text-blue-400">draft</span>
-            admin_en.html
-          </a>
-          <a href="mobile_ru.html" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 flex items-center gap-1.5 transition-colors">
-            <span class="material-symbols-outlined text-[14px] text-purple-400">draft</span>
-            mobile_ru.html
-          </a>
-          <a href="mobile_en.html" target="_blank" class="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 flex items-center gap-1.5 transition-colors">
-            <span class="material-symbols-outlined text-[14px] text-purple-400">draft</span>
-            mobile_en.html
-          </a>
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <footer class="border-t border-white/10 py-6 text-center text-xs text-slate-500">
-    White-Label E-Commerce Platform UI • Сгенерировано через Google Stitch MCP • Antigravity IDE
-  </footer>
-
-  <script>
-    let currentLang = 'ru';
-    let currentScreenIndex = 0;
-    let isConstrained = false;
-
-    const screens = {
-      ru: [
-        { file: 'catalog_ru.html', title: 'Витрина каталога', desc: 'Фильтры, товары, промо-баннеры', isMobile: false },
-        { file: 'checkout_ru.html', title: 'Оформление заказа', desc: 'Адрес доставки, оплата, корзина', isMobile: false },
-        { file: 'admin_ru.html', title: 'Панель продавца', desc: 'Метрики продаж, заказы, аналитика', isMobile: false },
-        { file: 'mobile_ru.html', title: 'Мобильная витрина', desc: 'Адаптивный каталог под смартфоны', isMobile: true }
-      ],
-      en: [
-        { file: 'catalog_en.html', title: 'Customer Storefront', desc: 'Catalog filtering, products & promo', isMobile: false },
-        { file: 'checkout_en.html', title: 'Seamless Checkout', desc: 'Delivery address, card payment & bag', isMobile: false },
-        { file: 'admin_en.html', title: 'Merchant Dashboard', desc: 'Analytics, revenue & order tracking', isMobile: false },
-        { file: 'mobile_en.html', title: 'Mobile Storefront', desc: 'Responsive mobile commerce layout', isMobile: true }
-      ]
-    };
-
-    function setLang(lang) {
-      currentLang = lang;
-      const btnRu = document.getElementById('btnRu');
-      const btnEn = document.getElementById('btnEn');
-      if (lang === 'ru') {
-        btnRu.className = 'px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all bg-emerald-700 text-white shadow-sm';
-        btnEn.className = 'px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-400 hover:text-white';
-      } else {
-        btnEn.className = 'px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all bg-emerald-700 text-white shadow-sm';
-        btnRu.className = 'px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all text-slate-400 hover:text-white';
-      }
-
-      // Update titles in tabs
-      screens[lang].forEach((s, idx) => {
-        document.getElementById(`tabTitle-${idx}`).textContent = s.title;
-        document.getElementById(`tabDesc-${idx}`).textContent = s.desc;
+<label class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low cursor-pointer">
+<div class="flex items-center gap-2">
+<input checked="" class="w-4 h-4 accent-primary" name="rating-filter" type="radio">
+<div class="flex items-center text-secondary-container">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[16px]">star_half</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">4.0 и выше</span>
+</label>
+</div>
+<!-- Action CTA -->
+<button class="w-full h-11 bg-primary hover:bg-primary-container text-on-primary rounded-lg font-label-md text-label-md flex items-center justify-center gap-2 shadow-sm transition-all transform active:scale-[0.99]">
+<span class="material-symbols-outlined text-[18px]">done</span>
+<span>Применить фильтры</span>
+</button>
+</aside>
+<!-- RIGHT SIDE: Products Grid Engine -->
+<div class="flex-1 w-full space-y-space-lg">
+<!-- Controls & Utility Toolbar -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col sm:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm">
+<span>Показано</span>
+<span class="font-semibold text-on-surface">1 – 6</span>
+<span>из 148 уникальных товаров</span>
+</div>
+<!-- Sorting Selector & View Toggle -->
+<div class="flex items-center gap-space-sm w-full sm:w-auto justify-end">
+<div class="flex items-center gap-2 bg-surface-container-low px-3 py-1.5 rounded-lg">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Сортировка:</span>
+<select class="bg-transparent font-label-md text-label-md text-on-surface focus:outline-none cursor-pointer">
+<option>По популярности</option>
+<option>По новизне</option>
+<option>Сначала дешевле</option>
+<option>Сначала дороже</option>
+<option>По рейтингу</option>
+</select>
+</div>
+<div class="hidden sm:flex items-center bg-surface-container-low p-1 rounded-lg">
+<button class="w-7 h-7 rounded bg-surface-container-lowest text-primary flex items-center justify-center shadow-xs">
+<span class="material-symbols-outlined text-[18px]">grid_view</span>
+</button>
+<button class="w-7 h-7 rounded text-on-surface-variant hover:text-on-surface flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">view_list</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Crisp 3-Column Modern Grid -->
+<div id="productsGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-space-lg">
+<!-- Product Card 1 -->
+<article class="group bg-surface-container-lowest rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col overflow-hidden relative">
+<div class="relative w-full aspect-square bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" data-alt="Editorial close-up of a charcoal merino wool overshirt neatly folded on a minimalist textured concrete surface with gentle natural morning shadows, soft linen ambient lighting, contemporary studio apparel catalog photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-dhE2nGIGxhDMdE8a8TL9KkxNb3NSgfIy9CoqElBuJFAduN-8GDmdmTUi6so8TF8zQ7VFIG1mC6op2xFcsrGtSly03jctOzLZVCnhVD0dA9Nf10qvMSZIBIwoa2xk6DriWxtFrP7qLifb-pS3GdsG3O125bYgyIb3xXrPPK5NDh9IC6wCvTRoroI_6bFGSGnEdTshmO1q8LzfAqdZXA3dyCXv7DaPFcQo6xt9ilshdM_ohHfvQ6VpEw">
+<!-- Secondary Amber Discount Tag -->
+<span class="absolute top-3 left-3 px-2 py-1 rounded-full bg-secondary-container text-on-secondary-container font-badge-xs text-badge-xs font-bold shadow-xs">
+                -20% СКИДКА
+              </span>
+<!-- Quick Wishlist Heart -->
+<button class="wishlist-btn absolute top-3 right-3 w-9 h-9 rounded-full bg-surface-container-lowest/90 backdrop-blur-md text-on-surface-variant hover:text-tertiary flex items-center justify-center transition-colors shadow-xs" title="Добавить в избранное">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<!-- Content Body -->
+<div class="p-space-md flex-1 flex flex-col justify-between space-y-space-sm">
+<div class="space-y-1">
+<div class="flex items-center justify-between text-secondary-container font-label-sm text-label-sm">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-bold text-on-surface">4.9</span>
+<span class="text-on-surface-variant">(128)</span>
+</div>
+<span class="text-[11px] uppercase tracking-wider font-semibold text-primary">Verdant Craft</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface tracking-tight group-hover:text-primary transition-colors">
+                  Рубашка из мериносовой шерсти
+                </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1">
+                  100% ультратонкая австралийская шерсть мериноса (21 микрон), пуговицы из натурального рога.
+                </p>
+</div>
+<!-- Price & Emerald CTA -->
+<div class="pt-space-xs space-y-space-sm">
+<div class="flex items-baseline gap-2">
+<span class="font-headline-md text-headline-md text-on-surface font-semibold">$96.00</span>
+<span class="font-body-md text-body-md text-outline line-through">$120.00</span>
+</div>
+<button class="add-cart-btn w-full h-10 bg-primary hover:bg-primary-container text-on-primary rounded-lg font-label-md text-label-md flex items-center justify-center gap-2 shadow-xs transition-colors">
+<span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+<span>В корзину</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Product Card 2 -->
+<article class="group bg-surface-container-lowest rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col overflow-hidden relative">
+<div class="relative w-full aspect-square bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" data-alt="Modern artisanal ceramic pour-over vessel with textured speckled ivory matte glaze sitting gracefully next to an unbleached filter and warm light oak table, Scandinavian Japandi minimalist product visual." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzm7Nck3bkHzdyNjRRbw-c3jucFurZ_JHniQ0HwGXszdUYLOBDWfyJ1ibeKB0zenHaWTxQxfOCefdmNcdG7Y_s-J26elFo3CqEzuJ0E4hBHQo-sjbZqySmLLCEija9umnXCfRtrGOOg2X3q3ZZ-P7zUTDDJDAdvASRs7FdMMzmkgHjvx3rRR9sG-E8xgDnkijAvZ1VLvynchAyZWtiUsxQqv0o_o67LymxS-zhy6y7ig0_tliia7rc_Q">
+<span class="absolute top-3 left-3 px-2 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-badge-xs text-badge-xs font-bold shadow-xs">
+                ХИТ
+              </span>
+<button class="wishlist-btn absolute top-3 right-3 w-9 h-9 rounded-full bg-surface-container-lowest/90 backdrop-blur-md text-on-surface-variant hover:text-tertiary flex items-center justify-center transition-colors shadow-xs" title="Добавить в избранное">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<div class="p-space-md flex-1 flex flex-col justify-between space-y-space-sm">
+<div class="space-y-1">
+<div class="flex items-center justify-between text-secondary-container font-label-sm text-label-sm">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-bold text-on-surface">5.0</span>
+<span class="text-on-surface-variant">(64)</span>
+</div>
+<span class="text-[11px] uppercase tracking-wider font-semibold text-primary">Norse Studio</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface tracking-tight group-hover:text-primary transition-colors">
+                  Керамическая воронка для кофе
+                </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1">
+                  Гончарная керамика ручной формовки с матовой глазурью для идеальной фильтрации.
+                </p>
+</div>
+<div class="pt-space-xs space-y-space-sm">
+<div class="flex items-baseline gap-2">
+<span class="font-headline-md text-headline-md text-on-surface font-semibold">$54.00</span>
+<span class="font-body-md text-body-md text-outline line-through">$68.00</span>
+</div>
+<button class="add-cart-btn w-full h-10 bg-primary hover:bg-primary-container text-on-primary rounded-lg font-label-md text-label-md flex items-center justify-center gap-2 shadow-xs transition-colors">
+<span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+<span>В корзину</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Product Card 3 -->
+<article class="group bg-surface-container-lowest rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col overflow-hidden relative">
+<div class="relative w-full aspect-square bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" data-alt="Cognac brown vegetable-tanned leather modular daypack backpack arranged upright with subtle brushed gunmetal hardware on a clean minimal slate surface, refined luxury accessory photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBV7ucfh4Tm9K3g8Rof6X1M8XGIDds_G0yIt7rmG-u2-sj6RjY9TwGXNEQFJ8XabQbJ6hkjYBUDhx0GgaawpgFNOHve3MRC6OuvcE2BPQ8iSIYdQJLWjf3FL7RDG9vDiF6srXJsx_BHpOEEwr6THUWFdqXfMmTY1lYOgrvhpqTmODVHho9i1N3RHtgb4TLE5Wa9ErblSGoZmudZkJt795qCFWXpkfcsekZZ4rsUu3PTiZz9Ecyuxp6ig">
+<span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-badge-xs text-badge-xs font-bold shadow-xs">
+                БЕСТСЕЛЛЕР
+              </span>
+<button class="wishlist-btn absolute top-3 right-3 w-9 h-9 rounded-full bg-surface-container-lowest/90 backdrop-blur-md text-on-surface-variant hover:text-tertiary flex items-center justify-center transition-colors shadow-xs" title="Добавить в избранное">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<div class="p-space-md flex-1 flex flex-col justify-between space-y-space-sm">
+<div class="space-y-1">
+<div class="flex items-center justify-between text-secondary-container font-label-sm text-label-sm">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-bold text-on-surface">4.9</span>
+<span class="text-on-surface-variant">(210)</span>
+</div>
+<span class="text-[11px] uppercase tracking-wider font-semibold text-primary">Atelier Minimal</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface tracking-tight group-hover:text-primary transition-colors">
+                  Кожаный городской рюкзак
+                </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1">
+                  Тосканская кожа растительного дубления со специальным отсеком для ноутбука до 16 дюймов.
+                </p>
+</div>
+<div class="pt-space-xs space-y-space-sm">
+<div class="flex items-baseline gap-2">
+<span class="font-headline-md text-headline-md text-on-surface font-semibold">$310.00</span>
+<span class="font-body-md text-body-md text-outline line-through">$360.00</span>
+</div>
+<button class="add-cart-btn w-full h-10 bg-primary hover:bg-primary-container text-on-primary rounded-lg font-label-md text-label-md flex items-center justify-center gap-2 shadow-xs transition-colors">
+<span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+<span>В корзину</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Product Card 4 -->
+<article class="group bg-surface-container-lowest rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col overflow-hidden relative">
+<div class="relative w-full aspect-square bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" data-alt="Dark indigo raw selvedge denim jeans folded with exposed pink selvedge ID line, brass rivets, pristine clean background, high-end artisanal Japanese denim catalog shot." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqf6wXcnhKxv1pzYb5psr5P26boHSSUCeYuK4NFHDgleAmrmH5BtOLyim77_gHDKooFMd1_TxqwPzq09pLUHosjVCyyB6CwTnk4SOO6M2gINkHyQrG9a981fNhGbil-B2EcOUxo2JGo94yUOvqTgr0vh_Mq8q_n3Hum4gFsHAZExcqk3gA1H5r5R2sW-YLJ3mB004B9Js_P-FLf-XcSJlpBHyUp0h5tQkPohAYLCpAcHkkH_NQKolPuw">
+<span class="absolute top-3 left-3 px-2 py-1 rounded-full bg-secondary-container text-on-secondary-container font-badge-xs text-badge-xs font-bold shadow-xs">
+                -15% СКИДКА
+              </span>
+<button class="wishlist-btn absolute top-3 right-3 w-9 h-9 rounded-full bg-surface-container-lowest/90 backdrop-blur-md text-on-surface-variant hover:text-tertiary flex items-center justify-center transition-colors shadow-xs" title="Добавить в избранное">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<div class="p-space-md flex-1 flex flex-col justify-between space-y-space-sm">
+<div class="space-y-1">
+<div class="flex items-center justify-between text-secondary-container font-label-sm text-label-sm">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-bold text-on-surface">4.8</span>
+<span class="text-on-surface-variant">(92)</span>
+</div>
+<span class="text-[11px] uppercase tracking-wider font-semibold text-primary">Form &amp; Function</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface tracking-tight group-hover:text-primary transition-colors">
+                  Селвидж-деним ручной работы
+                </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1">
+                  Японский деним Kurabo плотностью 14.5 унций. Нестираный, медная фурнитура.
+                </p>
+</div>
+<div class="pt-space-xs space-y-space-sm">
+<div class="flex items-baseline gap-2">
+<span class="font-headline-md text-headline-md text-on-surface font-semibold">$155.00</span>
+<span class="font-body-md text-body-md text-outline line-through">$180.00</span>
+</div>
+<button class="add-cart-btn w-full h-10 bg-primary hover:bg-primary-container text-on-primary rounded-lg font-label-md text-label-md flex items-center justify-center gap-2 shadow-xs transition-colors">
+<span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+<span>В корзину</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Product Card 5 -->
+<article class="group bg-surface-container-lowest rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col overflow-hidden relative">
+<div class="relative w-full aspect-square bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" data-alt="Hand-poured botanical scented candle in a textured matte amber glass jar with natural wood wick, resting on warm natural stone surface, botanical aesthetic, luxury home fragrance photo." src="https://lh3.googleusercontent.com/aida-public/AB6AXuATt_IxIVtSqdwKjFgqd01A2K60B-4p1hYJiBafOXeR7IFAnNa3YtCX-N8Ic4SPzwb2xUp0jSpFAyO5kdNJK4vh_E4kVVmf8BQfX82_n-0X63xp0rDBBVRoHvV6R44wIK_grMd46385xAYYI_GW55T1Y0lQ4qrR-lA26riKA6fiYB1WRI9nu213WLgbHo3MZAOC-VBrISnPHb1T3oj13jEyRa4sXy3UrNCMAZNvpb8Q7HFDNiZHB2trtw">
+<span class="absolute top-3 left-3 px-2 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-badge-xs text-badge-xs font-bold shadow-xs">
+                ХИТ
+              </span>
+<button class="wishlist-btn absolute top-3 right-3 w-9 h-9 rounded-full bg-surface-container-lowest/90 backdrop-blur-md text-on-surface-variant hover:text-tertiary flex items-center justify-center transition-colors shadow-xs" title="Добавить в избранное">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<div class="p-space-md flex-1 flex flex-col justify-between space-y-space-sm">
+<div class="space-y-1">
+<div class="flex items-center justify-between text-secondary-container font-label-sm text-label-sm">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-bold text-on-surface">5.0</span>
+<span class="text-on-surface-variant">(144)</span>
+</div>
+<span class="text-[11px] uppercase tracking-wider font-semibold text-primary">Verdant Craft</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface tracking-tight group-hover:text-primary transition-colors">
+                  Ароматическая свеча из сои
+                </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1">
+                  Дикий кедр, японский кипарис Хиноки и чёрный янтарь. 65 часов чистого горения соевого воска.
+                </p>
+</div>
+<div class="pt-space-xs space-y-space-sm">
+<div class="flex items-baseline gap-2">
+<span class="font-headline-md text-headline-md text-on-surface font-semibold">$38.00</span>
+<span class="font-body-md text-body-md text-outline line-through">$48.00</span>
+</div>
+<button class="add-cart-btn w-full h-10 bg-primary hover:bg-primary-container text-on-primary rounded-lg font-label-md text-label-md flex items-center justify-center gap-2 shadow-xs transition-colors">
+<span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+<span>В корзину</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Product Card 6 -->
+<article class="group bg-surface-container-lowest rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col overflow-hidden relative">
+<div class="relative w-full aspect-square bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" data-alt="Sandstone colored pure linen relaxed trousers laid out on an unbleached linen surface with subtle organic draping folds and soft warm light, slow fashion catalog aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlibfvUqvHF1VuwFTUvSoR_TDorp--3lgPOsoCiVCOzlG4j2DUOf86yXtmrU0guLl6sq_S-2Twsl2Avad9WZaVmvAMz9D1aSDtRDa0rr0AU6-7VPRhnZcRyzHDrg60_AQH8aQLyiR0sLNsLbfjeO2_3GyZMIP_zdsHBSylhcg3zIeFQ0pryal0aUS3sJjmLnbKRmqW4W4M_5JmBgaBC4AQPsxKcSrCfjs55tZ9YRlMjj7Ooe_zYeVT_g">
+<span class="absolute top-3 left-3 px-2 py-1 rounded-full bg-secondary-container text-on-secondary-container font-badge-xs text-badge-xs font-bold shadow-xs">
+                -25% СКИДКА
+              </span>
+<button class="wishlist-btn absolute top-3 right-3 w-9 h-9 rounded-full bg-surface-container-lowest/90 backdrop-blur-md text-on-surface-variant hover:text-tertiary flex items-center justify-center transition-colors shadow-xs" title="Добавить в избранное">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<div class="p-space-md flex-1 flex flex-col justify-between space-y-space-sm">
+<div class="space-y-1">
+<div class="flex items-center justify-between text-secondary-container font-label-sm text-label-sm">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-bold text-on-surface">4.9</span>
+<span class="text-on-surface-variant">(86)</span>
+</div>
+<span class="text-[11px] uppercase tracking-wider font-semibold text-primary">Norse Studio</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface tracking-tight group-hover:text-primary transition-colors">
+                  Свободные брюки изо льна
+                </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1">
+                  Французский нормандский лён, высокая посадка со складками и внутренним регулируемым шнурком.
+                </p>
+</div>
+<div class="pt-space-xs space-y-space-sm">
+<div class="flex items-baseline gap-2">
+<span class="font-headline-md text-headline-md text-on-surface font-semibold">$128.00</span>
+<span class="font-body-md text-body-md text-outline line-through">$170.00</span>
+</div>
+<button class="add-cart-btn w-full h-10 bg-primary hover:bg-primary-container text-on-primary rounded-lg font-label-md text-label-md flex items-center justify-center gap-2 shadow-xs transition-colors">
+<span class="material-symbols-outlined text-[18px]">shopping_bag</span>
+<span>В корзину</span>
+</button>
+</div>
+</div>
+</article>
+</div>
+<!-- Sleek Pagination Engine with Emerald Active & Amber Highlights -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm flex flex-col sm:flex-row items-center justify-between gap-space-md">
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Стр. <span class="font-semibold text-on-surface">1</span> из <span class="font-semibold text-on-surface">25</span>
+</p>
+<div class="flex items-center gap-1.5">
+<button class="w-9 h-9 rounded-lg bg-surface-container-low text-outline opacity-50 flex items-center justify-center cursor-not-allowed" disabled="">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-9 h-9 rounded-lg bg-primary text-on-primary font-label-md text-label-md shadow-sm">1</button>
+<button class="w-9 h-9 rounded-lg hover:bg-surface-container text-on-surface font-label-md text-label-md transition-colors">2</button>
+<button class="w-9 h-9 rounded-lg hover:bg-surface-container text-on-surface font-label-md text-label-md transition-colors">3</button>
+<span class="px-2 text-outline font-body-sm">...</span>
+<button class="w-9 h-9 rounded-lg hover:bg-surface-container text-on-surface font-label-md text-label-md transition-colors">25</button>
+<button class="w-9 h-9 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+<!-- Micro Quick Page Selector -->
+<div class="hidden lg:flex items-center gap-2">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Перейти к</span>
+<input class="w-12 h-8 px-2 rounded-lg bg-surface-container-low text-center font-label-sm text-label-sm text-on-surface focus:outline-none" max="25" min="1" type="number" value="1">
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Logic Hook -->
+<script>
+    // Size chip selection state toggle
+    document.querySelectorAll('.size-chip').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.classList.toggle('bg-primary');
+        btn.classList.toggle('text-on-primary');
+        btn.classList.toggle('bg-surface-container-low');
+        btn.classList.toggle('text-on-surface-variant');
+        btn.classList.toggle('shadow-sm');
       });
+    });
 
-      selectScreen(currentScreenIndex);
-    }
-
-    function selectScreen(index) {
-      currentScreenIndex = index;
-      const list = screens[currentLang];
-      const active = list[index];
-
-      // Update active tab style
-      for (let i = 0; i < 4; i++) {
-        const tab = document.getElementById(`tab-${i}`);
-        if (i === index) {
-          tab.classList.add('border-emerald-600', 'bg-emerald-950/20');
+    // Wishlist Heart Toggle
+    document.querySelectorAll('.wishlist-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const icon = btn.querySelector('.material-symbols-outlined');
+        const isFilled = icon.style.fontVariationSettings.includes("'FILL' 1");
+        if (isFilled) {
+          icon.style.fontVariationSettings = "'FILL' 0";
+          btn.classList.remove('text-tertiary');
+          btn.classList.add('text-on-surface-variant');
         } else {
-          tab.classList.remove('border-emerald-600', 'bg-emerald-950/20');
+          icon.style.fontVariationSettings = "'FILL' 1";
+          btn.classList.add('text-tertiary');
+          btn.classList.remove('text-on-surface-variant');
         }
-      }
+      });
+    });
 
-      // Update iframe & links
-      const iframe = document.getElementById('previewIframe');
-      const frameWrapper = document.getElementById('frameWrapper');
-      iframe.src = active.file;
-      document.getElementById('activeScreenPath').textContent = active.file;
-      document.getElementById('openTabBtn').href = active.file;
-
-      if (active.isMobile) {
-        frameWrapper.className = 'w-[420px] transition-all duration-300 flex justify-center';
-        iframe.className = 'w-[390px] h-[780px] rounded-3xl border-4 border-slate-700 bg-white shadow-2xl';
-      } else {
-        frameWrapper.className = 'w-full transition-all duration-300 flex justify-center';
-        iframe.className = 'w-full h-[780px] rounded-xl border border-white/10 bg-white shadow-2xl';
-      }
+    // Price Slider sync
+    const slider = document.getElementById('priceSlider');
+    const maxInput = document.getElementById('maxPriceInput');
+    const display = document.getElementById('priceDisplay');
+    if (slider && maxInput && display) {
+      slider.addEventListener('input', (e) => {
+        maxInput.value = e.target.value;
+        display.textContent = `$20 – $${e.target.value}`;
+      });
+      maxInput.addEventListener('input', (e) => {
+        slider.value = e.target.value;
+        display.textContent = `$20 – $${e.target.value}`;
+      });
     }
 
-    function toggleViewport() {
-      const frameWrapper = document.getElementById('frameWrapper');
-      const label = document.getElementById('viewportLabel');
-      isConstrained = !isConstrained;
-      if (isConstrained) {
-        frameWrapper.className = 'max-w-4xl transition-all duration-300 flex justify-center';
-        label.textContent = 'Размер: Планшет (1024px)';
-      } else {
-        frameWrapper.className = 'w-full transition-all duration-300 flex justify-center';
-        label.textContent = 'Размер: 100%';
-      }
-    }
+    // Add to cart animated micro-feedback
+    document.querySelectorAll('.add-cart-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const textSpan = btn.querySelector('span:last-child');
+        const orig = textSpan.textContent;
+        textSpan.textContent = 'Добавлено!';
+        btn.classList.add('bg-primary-container');
+        setTimeout(() => {
+          textSpan.textContent = orig;
+          btn.classList.remove('bg-primary-container');
+        }, 1500);
+      });
+    });
   </script>
-</body>
-</html>
+</div></div></div></footer>
+<script src="ecommerce.js"></script>
+<script src="catalog.js"></script>
+</body></html>

@@ -3,9 +3,9 @@
  * Production-ready client logic for Catalog, Cart, Checkout, and Admin
  */
 
-const API_BASE = window.location.origin.includes(':4000') 
-  ? '/api' 
-  : 'http://127.0.0.1:4000/api';
+const API_BASE = (window.location.hostname === '127.0.0.1' && window.location.port && window.location.port !== '4000')
+  ? 'http://127.0.0.1:4000/api' 
+  : '/api';
 
 const MangoStore = {
   // --- Cart Management (LocalStorage) ---
