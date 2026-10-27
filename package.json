@@ -2,11 +2,10 @@
   "name": "mango-marketplace",
   "version": "1.0.0",
   "description": "White-Label E-Commerce Platform",
-  "main": "server.js",
   "scripts": {
     "dev": "npm run dev --prefix client",
     "build": "cd client && npm install && npm run build",
-    "server": "node server.js",
+    "server": "node server/src/index.js",
     "test": "node tests/verify-backend.mjs"
   },
   "dependencies": {
