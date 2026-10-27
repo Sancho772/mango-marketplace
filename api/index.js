@@ -1,11 +1,73 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
+const fs = require('fs');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// In-Memory Database for Vercel Serverless Execution
+// Pre-load static storefront files into memory
+const staticFiles = [
+  'index.html',
+  'catalog_ru.html',
+  'catalog_en.html',
+  'checkout_ru.html',
+  'checkout_en.html',
+  'admin_ru.html',
+  'admin_en.html',
+  'hub.html',
+  'mobile_ru.html',
+  'mobile_en.html',
+  'ecommerce.js',
+  'catalog.js',
+  'checkout.js',
+  'admin.js'
+];
+
+const fileCache = {};
+for (const file of staticFiles) {
+  try {
+    const fullPath = path.join(__dirname, '..', file);
+    if (fs.existsSync(fullPath)) {
+      fileCache[file] = fs.readFileSync(fullPath);
+    }
+  } catch (err) {
+    console.warn('Could not read static file:', file, err.message);
+  }
+}
+
+function serveFile(res, filename) {
+  const content = fileCache[filename];
+  if (!content) {
+    try {
+      const fullPath = path.join(__dirname, '..', filename);
+      if (fs.existsSync(fullPath)) {
+        if (filename.endsWith('.js')) res.type('application/javascript');
+        else if (filename.endsWith('.html')) res.type('text/html');
+        return res.sendFile(fullPath);
+      }
+    } catch (_) {}
+    return res.status(404).send('File not found: ' + filename);
+  }
+
+  if (filename.endsWith('.js')) {
+    res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+  } else if (filename.endsWith('.html')) {
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  }
+  res.send(content);
+}
+
+// Storefront static page routes
+app.get('/', (req, res) => serveFile(res, 'index.html'));
+app.get('/index.html', (req, res) => serveFile(res, 'index.html'));
+
+for (const file of staticFiles) {
+  app.get('/' + file, (req, res) => serveFile(res, file));
+}
+
+// In-Memory Database for Live API
 const categories = [
   { id: 'cat_all', slug: 'all', name_ru: 'Все новинки', name_en: 'All New Arrivals', sort_order: 1 },
   { id: 'cat_apparel', slug: 'apparel', name_ru: 'Одежда и трикотаж', name_en: 'Apparel & Knitwear', sort_order: 2 },
