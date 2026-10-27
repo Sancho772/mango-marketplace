@@ -4,7 +4,7 @@
   "description": "White-Label E-Commerce Platform",
   "scripts": {
     "dev": "npm run dev --prefix client",
-    "build": "cd client && npm install && npm run build",
+    "build:client": "npm run build --prefix client",
     "server": "node server/src/index.js",
     "test": "node tests/verify-backend.mjs"
   },
