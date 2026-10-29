@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('node:path');
 
+const storefront = require('./storefront');
 const productsRouter = require('./routes/products');
 const ordersRouter = require('./routes/orders');
 const adminRouter = require('./routes/admin');
@@ -12,10 +13,6 @@ const PORT = process.env.PORT || 4000;
 // Middleware
 app.use(cors());
 app.use(express.json());
-
-// Serve static frontend files (prototypes, hub, assets)
-const publicDir = path.join(__dirname, '..', '..');
-app.use(express.static(publicDir));
 
 // API Routes
 app.use('/api', productsRouter);
@@ -31,9 +28,61 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+// Storefront routes (HTML pages)
+app.get(['/', '/index.html', '/catalog_ru.html', '/catalog_en.html', '/catalog'], (req, res) => {
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.send(storefront.catalogHtml);
+});
+
+app.get(['/checkout_ru.html', '/checkout_en.html', '/checkout'], (req, res) => {
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.send(storefront.checkoutHtml);
+});
+
+app.get(['/admin_ru.html', '/admin_en.html', '/admin'], (req, res) => {
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.send(storefront.adminHtml);
+});
+
+app.get(['/hub.html', '/hub'], (req, res) => {
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.send(storefront.hubHtml);
+});
+
+// Static JavaScript assets
+app.get('/ecommerce.js', (req, res) => {
+  res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+  res.send(storefront.ecommerceJs);
+});
+
+app.get('/catalog.js', (req, res) => {
+  res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+  res.send(storefront.catalogJs);
+});
+
+app.get('/checkout.js', (req, res) => {
+  res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+  res.send(storefront.checkoutJs);
+});
+
+app.get('/admin.js', (req, res) => {
+  res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
+  res.send(storefront.adminJs);
+});
+
+// Fallback static files for local disk development
+const publicDir = path.join(__dirname, '..', '..');
+app.use(express.static(publicDir));
+
 // Global 404 handler for API routes
 app.use('/api/*', (req, res) => {
   res.status(404).json({ error: 'API endpoint not found' });
+});
+
+// Catch-all route returns catalog storefront
+app.get('*', (req, res) => {
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.send(storefront.catalogHtml);
 });
 
 // Central Error Handler
@@ -47,12 +96,6 @@ if (require.main === module) {
     console.log(`===============================================`);
     console.log(`🚀 Mango Marketplace API Server is running!`);
     console.log(`📡 Base URL: http://127.0.0.1:${PORT}`);
-    console.log(`📦 REST Endpoints:`);
-    console.log(`   - GET  http://127.0.0.1:${PORT}/api/products`);
-    console.log(`   - GET  http://127.0.0.1:${PORT}/api/categories`);
-    console.log(`   - POST http://127.0.0.1:${PORT}/api/orders`);
-    console.log(`   - GET  http://127.0.0.1:${PORT}/api/admin/metrics`);
-    console.log(`   - GET  http://127.0.0.1:${PORT}/api/admin/orders`);
     console.log(`===============================================`);
   });
 }
