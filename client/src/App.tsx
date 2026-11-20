@@ -43,7 +43,10 @@ export const App: React.FC = () => {
       <footer className="w-full bg-surface-low border-t border-surface-container text-on-surface-variant mt-16">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
           <div className="flex items-center gap-2">
-            <img src="/logo.png" alt="VERDANT" className="h-6 w-auto object-contain" />
+            <span className="w-6 h-6 rounded bg-primary flex items-center justify-center text-white">
+              <span className="material-symbols-outlined text-[14px]">eco</span>
+            </span>
+            <span className="font-display font-bold text-on-surface">VERDANT</span>
             <span className="text-on-surface-variant">• © 2025 All rights reserved.</span>
           </div>
 

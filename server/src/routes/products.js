@@ -6,7 +6,19 @@ const db = require('../db/database');
 router.get('/categories', (req, res) => {
   try {
     const categories = db.prepare('SELECT * FROM categories ORDER BY sort_order ASC').all();
-    res.json(categories);
+    const categoriesWithCount = categories.map(cat => {
+      let countRow;
+      if (cat.slug === 'all' || cat.id === 'cat_all') {
+        countRow = db.prepare('SELECT COUNT(*) as count FROM products').get();
+      } else {
+        countRow = db.prepare('SELECT COUNT(*) as count FROM products WHERE category_id = ? OR category_id = ?').get(cat.id, cat.slug);
+      }
+      return {
+        ...cat,
+        count: countRow ? countRow.count : 0
+      };
+    });
+    res.json(categoriesWithCount);
   } catch (err) {
     res.status(500).json({ error: 'Failed to fetch categories', details: err.message });
   }
