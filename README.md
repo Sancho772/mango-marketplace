@@ -4,6 +4,9 @@
 
 Дизайн разработан с помощью **Google Stitch** на базе премиальной дизайн-системы **Luminescent Commerce** (Tailwind CSS, Plus Jakarta Sans, Inter, Material Symbols).
 
+🌐 **Live Demo (Production):** [https://mango-marketplace-eight.vercel.app](https://mango-marketplace-eight.vercel.app)  
+🐙 **GitHub Repository:** [https://github.com/Sancho772/mango-marketplace](https://github.com/Sancho772/mango-marketplace)
+
 ---
 
 ## 📚 Документация проекта

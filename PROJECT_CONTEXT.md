@@ -3,6 +3,9 @@
 ## 📌 О проекте
 **White-Label E-Commerce Platform** — современная масштабируемая платформа интернет-магазина с поддержкой кастомизации под бренд продавца. Включает витрину с каталогом товаров и фильтрами, корзину, страницу чекаута и панель управления администратора (продавца).
 
+* **Live Demo (Vercel):** [https://mango-marketplace-eight.vercel.app](https://mango-marketplace-eight.vercel.app)
+* **GitHub Repository:** [https://github.com/Sancho772/mango-marketplace](https://github.com/Sancho772/mango-marketplace)
+
 ---
 
 ## 🎯 CURRENT SPRINT TASKS
