@@ -1,5 +1,5 @@
 /**
- * Mango Marketplace — Shared Client Store & API Service
+ * VERDANT Commerce — Shared Client Store & API Service
  * Production-ready client logic for Catalog, Cart, Checkout, and Admin
  */
 
@@ -7,11 +7,11 @@ const API_BASE = (window.location.hostname === '127.0.0.1' && window.location.po
   ? 'http://127.0.0.1:4000/api' 
   : '/api';
 
-const MangoStore = {
+const VerdantStore = {
   // --- Cart Management (LocalStorage) ---
   getCart() {
     try {
-      const data = localStorage.getItem('mango_cart_v1');
+      const data = localStorage.getItem('verdant_cart_v1') || localStorage.getItem('mango_cart_v1');
       return data ? JSON.parse(data) : [];
     } catch (e) {
       console.error('Failed to read cart', e);
@@ -21,9 +21,9 @@ const MangoStore = {
 
   saveCart(cart) {
     try {
-      localStorage.setItem('mango_cart_v1', JSON.stringify(cart));
+      localStorage.setItem('verdant_cart_v1', JSON.stringify(cart));
       this.updateCartBadges();
-      window.dispatchEvent(new CustomEvent('mango:cart-updated', { detail: cart }));
+      window.dispatchEvent(new CustomEvent('verdant:cart-updated', { detail: cart }));
     } catch (e) {
       console.error('Failed to save cart', e);
     }
@@ -177,7 +177,7 @@ const MangoStore = {
 
 // Auto-run badge updates on load
 document.addEventListener('DOMContentLoaded', () => {
-  MangoStore.updateCartBadges();
+  VerdantStore.updateCartBadges();
 
   // Wire standard header links
   document.querySelectorAll('a[data-path="cart"]').forEach(a => {
@@ -195,10 +195,13 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+const MangoStore = VerdantStore;
+
 if (typeof window !== 'undefined') {
-  window.MangoStore = MangoStore;
+  window.VerdantStore = VerdantStore;
+  window.MangoStore = VerdantStore;
 }
 
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = MangoStore;
+  module.exports = VerdantStore;
 }

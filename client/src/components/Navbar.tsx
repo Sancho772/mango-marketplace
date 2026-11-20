@@ -27,12 +27,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={() => setCurrentView('catalog')}
             className="flex items-center gap-2 group text-left cursor-pointer"
           >
-            <span className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center text-white shadow-sm">
-              <span className="material-symbols-outlined text-[20px]">eco</span>
-            </span>
-            <span className="font-display font-bold text-xl tracking-tight text-on-surface group-hover:text-primary transition-colors">
-              VERDANT
-            </span>
+            <img src="/logo.png" alt="VERDANT" className="h-9 w-auto object-contain" />
           </button>
 
           <nav className="hidden xl:flex items-center gap-6">

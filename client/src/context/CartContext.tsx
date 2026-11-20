@@ -17,7 +17,7 @@ const CartContext = createContext<CartContextType | null>(null);
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>(() => {
     try {
-      const saved = localStorage.getItem('mango_cart_react_v1');
+      const saved = localStorage.getItem('verdant_cart_v1') || localStorage.getItem('mango_cart_react_v1');
       return saved ? JSON.parse(saved) : [];
     } catch {
       return [];
@@ -28,7 +28,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   useEffect(() => {
     try {
-      localStorage.setItem('mango_cart_react_v1', JSON.stringify(cart));
+      localStorage.setItem('verdant_cart_v1', JSON.stringify(cart));
     } catch (e) {
       console.error('Failed to save cart to localStorage', e);
     }

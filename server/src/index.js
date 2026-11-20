@@ -23,7 +23,7 @@ app.use('/api/admin', adminRouter);
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'ok',
-    service: 'mango-marketplace-api',
+    service: 'verdant-commerce-api',
     timestamp: new Date().toISOString()
   });
 });
@@ -94,7 +94,7 @@ app.use((err, req, res, next) => {
 if (require.main === module) {
   app.listen(PORT, '127.0.0.1', () => {
     console.log(`===============================================`);
-    console.log(`🚀 Mango Marketplace API Server is running!`);
+    console.log(`🌿 VERDANT Commerce API Server is running!`);
     console.log(`📡 Base URL: http://127.0.0.1:${PORT}`);
     console.log(`===============================================`);
   });

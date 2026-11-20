@@ -1,7 +1,7 @@
 {
-  "name": "mango-marketplace-server",
+  "name": "verdant-commerce-server",
   "version": "1.0.0",
-  "description": "Backend REST API for White-Label E-Commerce Platform",
+  "description": "Backend REST API for VERDANT E-Commerce Platform",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",

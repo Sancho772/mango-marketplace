@@ -1,7 +1,7 @@
 {
-  "name": "mango-marketplace",
+  "name": "verdant-commerce",
   "version": "1.0.0",
-  "description": "White-Label E-Commerce Platform",
+  "description": "VERDANT — Sustainable E-Commerce Platform",
   "scripts": {
     "dev": "npm run dev --prefix client",
     "build:client": "npm run build --prefix client",
