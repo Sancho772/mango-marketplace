@@ -70,6 +70,14 @@ app.get('/admin.js', (req, res) => {
   res.send(storefront.adminJs);
 });
 
+// React SPA static assets & route
+const distDir = path.join(__dirname, '..', '..', 'dist');
+app.use('/assets', express.static(path.join(distDir, 'assets')));
+app.get(['/app', '/app/*'], (req, res) => {
+  const spaIndex = path.join(distDir, 'index.html');
+  res.sendFile(spaIndex);
+});
+
 // Fallback static files for local disk development
 const publicDir = path.join(__dirname, '..', '..');
 app.use(express.static(publicDir));

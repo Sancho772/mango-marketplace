@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "npm run dev --prefix client",
     "build:client": "npm run build --prefix client",
+    "build": "npm run build:client && node scripts/bundle-storefront.mjs",
     "server": "node server/src/index.js",
     "test": "node tests/verify-backend.mjs"
   },

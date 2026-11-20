@@ -3,18 +3,28 @@
 <div class="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
 <!-- Top Branding & Navigation Anchor -->
 <header class="flex items-center justify-between pb-8">
-<div class="flex items-center gap-3">
-<div class="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-on-primary shadow-sm">
-<span class="material-symbols-outlined text-[20px]">spa</span>
+<a href="/" class="flex items-center gap-3 group">
+<div class="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-on-primary shadow-sm group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[20px]">eco</span>
 </div>
 <div>
-<span class="font-headline-sm text-headline-sm tracking-tight text-on-surface uppercase font-bold">VERDANT</span>
-<span class="font-body-sm text-body-sm text-on-surface-variant ml-1 font-medium tracking-widest">GOODS</span>
+<span class="font-headline-sm text-headline-sm tracking-tight text-on-surface uppercase font-bold group-hover:text-primary transition-colors">VERDANT</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant ml-1 font-medium tracking-widest">COMMERCE</span>
 </div>
-</div>
-<div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-low text-on-surface-variant">
+</a>
+<div class="flex items-center gap-3">
+<a href="/admin" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-bold border border-emerald-200 transition-all shadow-xs" title="Панель администратора">
+<span class="material-symbols-outlined text-[16px]">admin_panel_settings</span>
+<span>Админка</span>
+</a>
+<a href="/" class="flex items-center gap-1 text-xs font-semibold text-primary hover:underline px-2 py-1">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span>
+<span>Каталог</span>
+</a>
+<div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-low text-on-surface-variant">
 <span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: 'FILL' 1;">lock</span>
-<span class="font-label-sm text-label-sm">256-битное сквозное TLS-шифрование</span>
+<span class="font-label-sm text-label-sm">256-битное TLS-шифрование</span>
+</div>
 </div>
 </header>
 <!-- Main Two-Column Split Grid -->

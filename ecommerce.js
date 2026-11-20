@@ -140,6 +140,37 @@ const VerdantStore = {
     return res.json();
   },
 
+  async createAdminProduct(payload) {
+    const res = await fetch(`${API_BASE}/admin/products`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Ошибка добавления товара');
+    return data;
+  },
+
+  async updateAdminProduct(id, payload) {
+    const res = await fetch(`${API_BASE}/admin/products/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Ошибка обновления товара');
+    return data;
+  },
+
+  async deleteAdminProduct(id) {
+    const res = await fetch(`${API_BASE}/admin/products/${id}`, {
+      method: 'DELETE'
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Ошибка удаления товара');
+    return data;
+  },
+
   // --- UI Toast Notification (Max 2 lines, rule 9) ---
   showToast(message, type = 'success') {
     let container = document.getElementById('mango-toast-container');
