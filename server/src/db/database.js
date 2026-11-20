@@ -215,6 +215,8 @@ function createSchema(sqliteDb) {
       payment_method TEXT NOT NULL,
       total_amount REAL NOT NULL,
       status TEXT DEFAULT 'pending',
+      promo_code TEXT,
+      discount_amount REAL DEFAULT 0,
       created_at TEXT DEFAULT (datetime('now'))
     );
 
@@ -229,6 +231,9 @@ function createSchema(sqliteDb) {
       selected_color TEXT
     );
   `);
+
+  try { sqliteDb.exec('ALTER TABLE orders ADD COLUMN promo_code TEXT;'); } catch (_) {}
+  try { sqliteDb.exec('ALTER TABLE orders ADD COLUMN discount_amount REAL DEFAULT 0;'); } catch (_) {}
 }
 
 function autoSeedIfNeeded(sqliteDb) {
@@ -341,9 +346,12 @@ function createMemoryStore() {
         },
         run(...params) {
           if (trimmed.includes('INSERT INTO orders')) {
-            const [id, customer_name, customer_email, customer_phone, shipping_address, payment_method, total_amount, status] = params;
+            const [id, customer_name, customer_email, customer_phone, shipping_address, payment_method, total_amount, promo_code, discount_amount] = params;
             store.orders.unshift({
-              id, customer_name, customer_email, customer_phone, shipping_address, payment_method, total_amount, status: status || 'pending',
+              id, customer_name, customer_email, customer_phone, shipping_address, payment_method, total_amount,
+              promo_code: promo_code || null,
+              discount_amount: discount_amount || 0,
+              status: 'pending',
               created_at: new Date().toISOString()
             });
             return { changes: 1 };
@@ -358,6 +366,40 @@ function createMemoryStore() {
             const order = store.orders.find(o => o.id === id);
             if (order) {
               order.status = status;
+              return { changes: 1 };
+            }
+            return { changes: 0 };
+          }
+          if (trimmed.includes('UPDATE products SET stock = MAX(0, stock - ?) WHERE id = ?')) {
+            const [qty, id] = params;
+            const prod = store.products.find(p => p.id === id);
+            if (prod) {
+              prod.stock = Math.max(0, (prod.stock || 0) - qty);
+              return { changes: 1 };
+            }
+            return { changes: 0 };
+          }
+          if (trimmed.includes('INSERT INTO products')) {
+            const [id, category_id, title_ru, title_en, description_ru, description_en, price, old_price, rating_score, rating_count, brand, image_url, color, sizes, stock, is_bestseller, discount_percent] = params;
+            store.products.unshift({
+              id, category_id, title_ru, title_en, description_ru, description_en, price, old_price, rating_score: rating_score || 5.0, rating_count: rating_count || 1, brand, image_url, color, sizes, stock: stock || 10, is_bestseller: is_bestseller || 0, discount_percent: discount_percent || 0
+            });
+            return { changes: 1 };
+          }
+          if (trimmed.includes('DELETE FROM products WHERE id = ?')) {
+            const [id] = params;
+            const idx = store.products.findIndex(p => p.id === id);
+            if (idx !== -1) {
+              store.products.splice(idx, 1);
+              return { changes: 1 };
+            }
+            return { changes: 0 };
+          }
+          if (trimmed.includes('UPDATE products SET')) {
+            const id = params[params.length - 1];
+            const prod = store.products.find(p => p.id === id);
+            if (prod) {
+              // basic update in memory
               return { changes: 1 };
             }
             return { changes: 0 };

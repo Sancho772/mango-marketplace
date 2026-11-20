@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import { useLanguage } from '../context/LanguageContext';
 import { api } from '../services/api';
+import { PromoValidationResult } from '../types';
 
 interface CheckoutPageProps {
   onBackToCatalog: () => void;
@@ -23,6 +24,32 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ onBackToCatalog }) =
   const [createdOrderId, setCreatedOrderId] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
+  // Promo Code State
+  const [promoInput, setPromoInput] = useState('');
+  const [appliedPromo, setAppliedPromo] = useState<PromoValidationResult | null>(null);
+  const [promoError, setPromoError] = useState<string | null>(null);
+  const [isValidatingPromo, setIsValidatingPromo] = useState(false);
+
+  const handleApplyPromo = async () => {
+    if (!promoInput.trim()) return;
+    setIsValidatingPromo(true);
+    setPromoError(null);
+    try {
+      const res = await api.validatePromo(promoInput.trim());
+      setAppliedPromo(res);
+      setPromoInput('');
+    } catch (err: any) {
+      setPromoError(err.message || 'Неверный промокод');
+    } finally {
+      setIsValidatingPromo(false);
+    }
+  };
+
+  const discountAmount = appliedPromo
+    ? parseFloat(((totalPrice * appliedPromo.discountPercent) / 100).toFixed(2))
+    : 0;
+  const finalPrice = Math.max(0, parseFloat((totalPrice - discountAmount).toFixed(2)));
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (cart.length === 0) return;
@@ -39,7 +66,8 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ onBackToCatalog }) =
           size: item.size,
           color: item.color
         })),
-        paymentMethod
+        paymentMethod,
+        promoCode: appliedPromo?.code
       });
 
       if (res.success && res.orderId) {
@@ -65,6 +93,11 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ onBackToCatalog }) =
         <p className="text-sm text-on-surface-variant">
           {t('checkout.successDesc')} <span className="font-bold text-primary font-mono text-base">{createdOrderId}</span>
         </p>
+        {appliedPromo && (
+          <p className="text-xs text-emerald-600 font-medium">
+            Применен промокод {appliedPromo.code} со скидкой {appliedPromo.discountPercent}%!
+          </p>
+        )}
         <p className="text-xs text-on-surface-variant max-w-md mx-auto">
           Детали заказа и ссылка на трекинг отправлены на указанный email. Спасибо за покупку в VERDANT!
         </p>
@@ -213,7 +246,7 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ onBackToCatalog }) =
               }`}
             >
               <span className="material-symbols-outlined text-[20px]">lock</span>
-              <span>{isSubmitting ? t('checkout.processing') : `${t('checkout.submit')} • $${totalPrice.toFixed(2)}`}</span>
+              <span>{isSubmitting ? t('checkout.processing') : `${t('checkout.submit')} • $${finalPrice.toFixed(2)}`}</span>
             </button>
           </form>
         </div>
@@ -246,20 +279,20 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ onBackToCatalog }) =
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => updateQuantity(item.productId, item.quantity - 1)}
-                            className="w-6 h-6 rounded bg-surface-low text-on-surface flex items-center justify-center text-xs font-bold"
+                            className="w-6 h-6 rounded bg-surface-low text-on-surface flex items-center justify-center text-xs font-bold cursor-pointer"
                           >
                             -
                           </button>
                           <span className="text-xs font-semibold">{item.quantity}</span>
                           <button
                             onClick={() => updateQuantity(item.productId, item.quantity + 1)}
-                            className="w-6 h-6 rounded bg-surface-low text-on-surface flex items-center justify-center text-xs font-bold"
+                            className="w-6 h-6 rounded bg-surface-low text-on-surface flex items-center justify-center text-xs font-bold cursor-pointer"
                           >
                             +
                           </button>
                           <button
                             onClick={() => removeFromCart(item.productId)}
-                            className="text-xs text-rose-500 hover:text-rose-700 ml-1"
+                            className="text-xs text-rose-500 hover:text-rose-700 ml-1 cursor-pointer"
                           >
                             ✕
                           </button>
@@ -271,18 +304,94 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ onBackToCatalog }) =
               </div>
             )}
 
+            {/* Promo Code Input */}
+            <div className="pt-4 border-t border-surface-container space-y-2">
+              <label className="text-xs font-semibold text-on-surface flex items-center gap-1.5">
+                <span className="material-symbols-outlined text-[16px] text-primary">sell</span>
+                Промокод на скидку:
+              </label>
+
+              {appliedPromo ? (
+                <div className="flex items-center justify-between bg-emerald-50 border border-emerald-200 px-3 py-2 rounded-xl text-xs text-emerald-800">
+                  <div className="flex items-center gap-2">
+                    <span className="material-symbols-outlined text-[16px] text-emerald-600">check_circle</span>
+                    <span>
+                      <strong className="font-mono">{appliedPromo.code}</strong> (-{appliedPromo.discountPercent}%)
+                    </span>
+                  </div>
+                  <button
+                    onClick={() => setAppliedPromo(null)}
+                    className="text-emerald-700 hover:text-rose-600 transition-colors font-medium cursor-pointer"
+                  >
+                    Удалить
+                  </button>
+                </div>
+              ) : (
+                <div className="space-y-1.5">
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      placeholder="VERDANT10 или ECO2025"
+                      value={promoInput}
+                      onChange={(e) => setPromoInput(e.target.value.toUpperCase())}
+                      className="flex-1 h-9 px-3 bg-surface-low rounded-lg text-xs font-mono uppercase text-on-surface focus:outline-none focus:ring-1 focus:ring-primary border border-outline-variant/30"
+                    />
+                    <button
+                      type="button"
+                      onClick={handleApplyPromo}
+                      disabled={isValidatingPromo || !promoInput.trim()}
+                      className="px-3 h-9 bg-primary hover:bg-primary-hover text-white rounded-lg text-xs font-semibold transition-colors cursor-pointer disabled:opacity-50"
+                    >
+                      {isValidatingPromo ? '...' : 'Применить'}
+                    </button>
+                  </div>
+                  {promoError && (
+                    <p className="text-[11px] text-rose-500">{promoError}</p>
+                  )}
+                  <div className="flex items-center gap-1.5 text-[11px] text-on-surface-variant">
+                    <span>Подсказка:</span>
+                    <button
+                      type="button"
+                      onClick={() => setPromoInput('VERDANT10')}
+                      className="font-mono text-primary underline cursor-pointer"
+                    >
+                      VERDANT10
+                    </button>
+                    <span>или</span>
+                    <button
+                      type="button"
+                      onClick={() => setPromoInput('ECO2025')}
+                      className="font-mono text-primary underline cursor-pointer"
+                    >
+                      ECO2025
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Calculations Breakdown */}
             <div className="pt-4 border-t border-surface-container space-y-2 text-xs">
               <div className="flex justify-between text-on-surface-variant">
                 <span>{t('checkout.subtotal')}</span>
                 <span>${totalPrice.toFixed(2)}</span>
               </div>
+
+              {appliedPromo && (
+                <div className="flex justify-between text-emerald-600 font-medium">
+                  <span>Скидка ({appliedPromo.discountPercent}%)</span>
+                  <span>-${discountAmount.toFixed(2)}</span>
+                </div>
+              )}
+
               <div className="flex justify-between text-on-surface-variant">
                 <span>{t('checkout.shipping')}</span>
                 <span className="text-primary font-semibold">{t('checkout.free')}</span>
               </div>
+
               <div className="flex justify-between text-base font-bold text-on-surface pt-2 border-t border-surface-container">
                 <span>{t('checkout.total')}</span>
-                <span className="text-primary">${totalPrice.toFixed(2)}</span>
+                <span className="text-primary">${finalPrice.toFixed(2)}</span>
               </div>
             </div>
           </div>

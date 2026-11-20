@@ -12,7 +12,7 @@ export interface Product {
   brand: string;
   image_url: string;
   color: string;
-  sizes: string;
+  sizes: string[] | string;
   stock: number;
   is_bestseller: number | boolean;
   discount_percent: number;
@@ -61,7 +61,9 @@ export interface Order {
   shipping_address: string;
   payment_method: string;
   total_amount: number;
-  status: 'pending' | 'processing' | 'shipped' | 'delivered';
+  promo_code?: string;
+  discount_amount?: number;
+  status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
   created_at: string;
   items?: {
     id: string;
@@ -78,6 +80,26 @@ export interface AdminMetrics {
   revenue: number;
   ordersCount: number;
   averageCheck: number;
-  deliveredOrders: number;
-  recentOrdersCount: number;
+  deliveredOrders?: number;
+  productsCount?: number;
+  conversionRate?: string;
+  statusCounts?: { status: string; count: number }[];
+}
+
+export interface PromoValidationResult {
+  valid: boolean;
+  code: string;
+  discountPercent: number;
+  description: string;
+}
+
+export interface CreateOrderResponse {
+  success: boolean;
+  orderId: string;
+  totalAmount: number;
+  subtotal?: number;
+  discountAmount?: number;
+  promoCode?: string;
+  status: string;
+  message: string;
 }

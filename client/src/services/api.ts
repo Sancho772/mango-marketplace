@@ -1,4 +1,4 @@
-import { Product, Category, Order, AdminMetrics } from '../types';
+import { Product, Category, Order, AdminMetrics, PromoValidationResult, CreateOrderResponse } from '../types';
 
 const API_BASE = '/api';
 
@@ -22,11 +22,23 @@ export const api = {
     return res.json();
   },
 
+  async validatePromo(code: string): Promise<PromoValidationResult> {
+    const res = await fetch(`${API_BASE}/promocodes/validate`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Неверный промокод');
+    return data;
+  },
+
   async createOrder(orderData: {
     customer: { name: string; email: string; phone: string; address: string };
     items: { productId: string; quantity: number; size: string; color: string }[];
     paymentMethod: string;
-  }): Promise<{ success: boolean; orderId: string; totalAmount: number }> {
+    promoCode?: string;
+  }): Promise<CreateOrderResponse> {
     const res = await fetch(`${API_BASE}/orders`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -51,13 +63,50 @@ export const api = {
     return res.json();
   },
 
-  async updateOrderStatus(orderId: string, status: string): Promise<{ success: boolean; order: Order }> {
+  async updateOrderStatus(orderId: string, status: string): Promise<{ success: boolean; orderId: string; status: string }> {
     const res = await fetch(`${API_BASE}/admin/orders/${orderId}/status`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status })
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}: Failed to update order status`);
+    return res.json();
+  },
+
+  async createProduct(productData: Partial<Product>): Promise<{ success: boolean; product: Product }> {
+    const res = await fetch(`${API_BASE}/admin/products`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(productData)
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error || `HTTP ${res.status}: Failed to create product`);
+    }
+    return res.json();
+  },
+
+  async updateProduct(id: string, productData: Partial<Product>): Promise<{ success: boolean; product: Product }> {
+    const res = await fetch(`${API_BASE}/admin/products/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(productData)
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error || `HTTP ${res.status}: Failed to update product`);
+    }
+    return res.json();
+  },
+
+  async deleteProduct(id: string): Promise<{ success: boolean; id: string }> {
+    const res = await fetch(`${API_BASE}/admin/products/${id}`, {
+      method: 'DELETE'
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error || `HTTP ${res.status}: Failed to delete product`);
+    }
     return res.json();
   }
 };

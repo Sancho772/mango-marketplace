@@ -5,25 +5,43 @@ import { useLanguage } from '../context/LanguageContext';
 
 interface ProductCardProps {
   product: Product;
+  onQuickView?: (product: Product) => void;
+  isWishlisted?: boolean;
+  onToggleWishlist?: (productId: string) => void;
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+export const ProductCard: React.FC<ProductCardProps> = ({
+  product,
+  onQuickView,
+  isWishlisted = false,
+  onToggleWishlist
+}) => {
   const { addToCart } = useCart();
   const { lang, t } = useLanguage();
-  const [isWishlisted, setIsWishlisted] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
 
   const title = lang === 'en' ? (product.title_en || product.title_ru) : (product.title_ru || product.title_en);
   const desc = lang === 'en' ? (product.description_en || product.description_ru) : (product.description_ru || product.description_en);
 
-  const handleAdd = () => {
+  const handleAdd = (e: React.MouseEvent) => {
+    e.stopPropagation();
     addToCart(product, 1);
     setIsAdded(true);
     setTimeout(() => setIsAdded(false), 1200);
   };
 
+  const handleWishlistClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (onToggleWishlist) {
+      onToggleWishlist(product.id);
+    }
+  };
+
   return (
-    <article className="group bg-white rounded-xl shadow-xs hover:shadow-md transition-all flex flex-col overflow-hidden relative border border-outline-variant/30">
+    <article 
+      onClick={() => onQuickView && onQuickView(product)}
+      className="group bg-white rounded-2xl shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col overflow-hidden relative border border-outline-variant/30 cursor-pointer"
+    >
       {/* Image & Badges */}
       <div className="relative w-full aspect-square bg-surface-container overflow-hidden">
         <img
@@ -32,6 +50,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
           loading="lazy"
         />
+
+        {/* Quick View Hover Pill */}
+        <div className="absolute inset-0 bg-slate-900/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+          <span className="px-3 py-1.5 rounded-full bg-white/95 text-xs font-semibold text-on-surface shadow-md backdrop-blur-xs flex items-center gap-1">
+            <span className="material-symbols-outlined text-[15px]">visibility</span>
+            Быстрый просмотр
+          </span>
+        </div>
 
         {/* Badge */}
         {product.discount_percent > 0 ? (
@@ -46,11 +72,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
         {/* Wishlist Heart */}
         <button
-          onClick={() => setIsWishlisted(!isWishlisted)}
-          className="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/90 backdrop-blur-md text-on-surface-variant hover:text-rose-500 flex items-center justify-center transition-colors shadow-xs"
-          title="Wishlist"
+          onClick={handleWishlistClick}
+          className="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/90 backdrop-blur-md text-on-surface-variant hover:text-rose-500 flex items-center justify-center transition-colors shadow-xs cursor-pointer z-10"
+          title="В избранное"
         >
-          <span className={`material-symbols-outlined text-[18px] ${isWishlisted ? 'text-rose-500 material-symbols-filled' : ''}`}>
+          <span className={`material-symbols-outlined text-[18px] ${isWishlisted ? 'text-rose-500 fill-current' : ''}`}>
             favorite
           </span>
         </button>
@@ -61,7 +87,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <div className="space-y-1">
           <div className="flex items-center justify-between text-secondary font-medium text-xs">
             <div className="flex items-center gap-1">
-              <span className="material-symbols-outlined text-[16px] material-symbols-filled">star</span>
+              <span className="material-symbols-outlined text-[16px] fill-current">star</span>
               <span className="font-bold text-on-surface">{product.rating_score}</span>
               <span className="text-on-surface-variant">({product.rating_count})</span>
             </div>
@@ -94,7 +120,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
           <button
             onClick={handleAdd}
-            className={`w-full h-10 rounded-lg text-sm font-semibold flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer ${
+            className={`w-full h-10 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 shadow-xs transition-all cursor-pointer ${
               isAdded
                 ? 'bg-emerald-800 text-white'
                 : 'bg-primary hover:bg-primary-hover text-white'

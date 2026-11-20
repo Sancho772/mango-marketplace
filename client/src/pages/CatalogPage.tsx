@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Product, Category } from '../types';
 import { api } from '../services/api';
 import { ProductCard } from '../components/ProductCard';
+import { ProductModal } from '../components/ProductModal';
 import { useLanguage } from '../context/LanguageContext';
 
 interface CatalogPageProps {
@@ -17,6 +18,32 @@ export const CatalogPage: React.FC<CatalogPageProps> = ({ searchQuery }) => {
   const [maxPrice, setMaxPrice] = useState<number>(500);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+
+  // Quick View Modal & Wishlist
+  const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
+  const [wishlist, setWishlist] = useState<Set<string>>(() => {
+    try {
+      const saved = localStorage.getItem('verdant_wishlist');
+      return saved ? new Set(JSON.parse(saved)) : new Set();
+    } catch {
+      return new Set();
+    }
+  });
+
+  const toggleWishlist = (productId: string) => {
+    setWishlist(prev => {
+      const next = new Set(prev);
+      if (next.has(productId)) {
+        next.delete(productId);
+      } else {
+        next.add(productId);
+      }
+      try {
+        localStorage.setItem('verdant_wishlist', JSON.stringify(Array.from(next)));
+      } catch (_) {}
+      return next;
+    });
+  };
 
   useEffect(() => {
     api.getCategories()
@@ -86,7 +113,7 @@ export const CatalogPage: React.FC<CatalogPageProps> = ({ searchQuery }) => {
             </div>
             <div className="h-4 w-px bg-surface-container"></div>
             <div className="flex items-center gap-1.5 text-secondary">
-              <span className="material-symbols-outlined text-[18px] material-symbols-filled">star</span>
+              <span className="material-symbols-outlined text-[18px] fill-current">star</span>
               <span className="text-xs font-bold text-on-surface">4.92 {t('hero.rating')}</span>
             </div>
           </div>
@@ -108,7 +135,7 @@ export const CatalogPage: React.FC<CatalogPageProps> = ({ searchQuery }) => {
                 setMaxPrice(500);
                 setSortOption('new');
               }}
-              className="text-xs text-primary hover:underline font-semibold"
+              className="text-xs text-primary hover:underline font-semibold cursor-pointer"
             >
               {t('filters.reset')}
             </button>
@@ -122,7 +149,7 @@ export const CatalogPage: React.FC<CatalogPageProps> = ({ searchQuery }) => {
 
             <button
               onClick={() => setSelectedCategory('all')}
-              className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold transition-all ${
+              className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                 selectedCategory === 'all'
                   ? 'bg-primary-fixed text-emerald-950 font-bold'
                   : 'text-on-surface-variant hover:bg-surface-low'
@@ -139,7 +166,7 @@ export const CatalogPage: React.FC<CatalogPageProps> = ({ searchQuery }) => {
                 <button
                   key={cat.id}
                   onClick={() => setSelectedCategory(cat.slug)}
-                  className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold transition-all ${
+                  className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                     isSelected
                       ? 'bg-primary-fixed text-emerald-950 font-bold'
                       : 'text-on-surface-variant hover:bg-surface-low'
@@ -228,12 +255,26 @@ export const CatalogPage: React.FC<CatalogPageProps> = ({ searchQuery }) => {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
               {products.map(product => (
-                <ProductCard key={product.id} product={product} />
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  onQuickView={(p) => setQuickViewProduct(p)}
+                  isWishlisted={wishlist.has(product.id)}
+                  onToggleWishlist={toggleWishlist}
+                />
               ))}
             </div>
           )}
         </div>
       </div>
+
+      {/* Quick View Modal */}
+      <ProductModal
+        product={quickViewProduct}
+        onClose={() => setQuickViewProduct(null)}
+        isWishlisted={quickViewProduct ? wishlist.has(quickViewProduct.id) : false}
+        onToggleWishlist={toggleWishlist}
+      />
     </div>
   );
 };
